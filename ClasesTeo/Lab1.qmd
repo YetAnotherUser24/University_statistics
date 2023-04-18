@@ -1,0 +1,17 @@
+---
+title: "Lab1"
+format: html
+editor: visual
+---
+
+## Cargar librerías
+
+```{r}
+library(readr)
+```
+
+## Para leer una base de datos
+
+```{r}
+DF <- read_csv("DatosDiversos.csv")
+```

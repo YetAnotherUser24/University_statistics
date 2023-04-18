@@ -1,0 +1,115 @@
+---
+title: "Lab2"
+format: html
+editor: visual
+---
+
+# Laboratorio 2
+
+Es recomendable limpiar el ambiente al iniciar un nuevo laboratorio. Usamos el comando rm(list=ls()) desde la consola.
+
+## Cargar librerías
+
+Para cargar una librería y poder usarla usamos la función library.
+
+```{r}
+library(readr)
+```
+
+## Para leer una base de datos
+
+```{r}
+DF <- read_csv("DatosDiversos.csv")
+```
+
+Importante: NO USAR JAMÁS la función read.csv de R básico.
+
+Para ver el nombre de las variables que se tienen usamos la función names.
+
+```{r}
+names(DF)  # names devuelve el nombre de las variables del DataFrame
+```
+
+Lo primero que debemos hacer es cambiar el nombre de las variables. Se recomienda usar nombres sencillos, de una sola palabra, sin tildes, sin eñes, sin espacios en blanco.
+
+Se recomienda usar la función rename de la librería dplyr para cambiar el nombre a las variables.
+
+```{r}
+library(dplyr)
+```
+
+Ahora cambiemos el nombre de las variables.
+
+```{r}
+DF %>% rename(Periodo = Período, Seccion = Sección, Estatura = `Estatura (cm)`, Peso = `Peso (kg)`, Signo = `Signo del zodiaco`,Tiempo = `Tiempo de reacción`, Video = `Juega videojuegos`, Deporte = `Hace deporte`, Color = `Color favorito`, Zapato = `Talla de zapato`, Polo = `Talla de polo`, SO = `Sistema operativo`, Fecha = `Fecha de nacimiento`) -> DFN
+```
+
+Para ver el DataFrame:
+
+```{r}
+DFN
+```
+
+Para saber cuántas observaciones o unidades muestrales se tienen, se puede usar la siguiente función.
+
+```{r}
+nrow(DFN)
+```
+
+Para saber cuántas columnas o variables tiene la base de datos.
+
+```{r}
+ncol(DFN)   # indica el número de variables que tiene la data    
+```
+
+Para acceder al valor que tiene una posición particular en la data.
+
+```{r}
+DFN[3,6]  # devuelve el valor que tiene el DataFrame en la posición (3,6)
+```
+
+Para acceder a toda una fila de la data.
+
+```{r}
+DFN[3,]
+```
+
+Para acceder o ver toda una columna del DataFrame.
+
+```{r}
+DFN[,7]
+```
+
+Para saber cúantos datos faltantes (NA's) tiene el Dataframe:
+
+```{r}
+sum(is.na(DFN))
+```
+
+Si quisiéramos ver la cantidad de datos faltantes que hay y la cantidad de datos no faltantes que hay puedo usar la función table. Table da un resumen de los valores que toma is.na y cuánta cantidad hay de cada tipo.
+
+```{r}
+table(is.na(DFN))
+```
+
+```{r}
+table(DFN$Sexo)
+```
+
+```{r}
+table(DFN$Signo)
+```
+
+Para saber cuántas observaciones completas tiene la data.
+
+```{r}
+sum(complete.cases(DFN))
+```
+
+NOTA: Las dos últimas columnas (la 19 y la 20) tienen puros NA's, eso hace que no haya una sola observación completa. Esto es un error ya que si hubo personas que llenaron sus datos completos.
+
+Hay funciones en R que tienen su negación (la ! antes de la función que se quiere usar es la negación de la misma). Por ejemplo, para ver cuántas observaciones incompletas se tienen.
+
+```{r}
+sum(!complete.cases(DFN))
+```

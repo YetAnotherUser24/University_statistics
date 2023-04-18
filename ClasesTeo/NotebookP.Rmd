@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+    
+---
+
+$$2 + 4 = 6$$
+
+>BLOQUE de texto
+
+```{r include=FALSE }
+a <- 2+4
+
+cat('Sumando 2 y 4 obtenemos',a)
+```
+
+```{r eval=FALSE, fig.cap='Grafico de 4 puntos', fig.align='center'}
+b <- c(1,4,6,8)
+print('Aprendiendo R')
+c <- c(2,10,3,7)
+
+
+plot(b,c)
+```
+

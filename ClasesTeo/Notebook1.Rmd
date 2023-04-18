@@ -1,0 +1,80 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+  toc: true
+  toc_depth: 2
+---
+
+# Para hacer titulos
+
+# Introducción al Markdown
+## Subtitulo
+### SubSubtitulo
+#### SubSubSubtitulo
+
+# Para colocar palabras o frase en negritas o italicas
+
+*itálicas* o _itálicas_
+**negritas** o __negritas__
+***negritas e itálicas*** 
+
+# Para tachar
+
+~~tachado~~
+
+# Listas no numeradas
+
+* Es fácil hacer una lista de items
+* añadiendo otro
+* y otro más.
+
+Otra manera:
+
+- Es fácil hacer una lista de items
+- añadiendo otro
+- y otro más.
+
+# Lista numerada
+
+1. Una lista numerada
+2. también es fácil
+3. un numero, un punto, un espacio blanco y el texto
+1. no importa el valor
+
+# Lista numerada con subtitulos
+
+1. Esta es
+
+   1.1. una lista numerada
+   
+   1.2. solo necesitas 4 espacios
+   
+   1.3. en blanco y espacios entre lineas
+   
+# Para hacer tablas
+
+Producto Marca    Precio
+-------- -------- ------
+Azúcar   Dulcita  S/2.00
+Sal      Saladita S/3.00
+
+
+|Producto  |Marca   | Precio|
+|:-------- |:--------:| ------:|
+|Azúcar    |Dulcita | S/2.00|
+|Sal       |Saladita| S/3.00|
+
+# Enlaces
+
+[UTEC] (https://www.utec.edu.pe)
+
+# Imagenes
+superíndice^1^
+
+![Imgen2](turip.jpg)
+# Latex
+
+$$\int_0^1 f(x)dx$$
+$F = ma$

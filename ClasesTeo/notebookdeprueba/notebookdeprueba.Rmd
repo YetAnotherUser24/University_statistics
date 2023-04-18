@@ -1,0 +1,76 @@
+---
+title: " PLANTILLA BÁSICA PARA UN PROYECTO"
+author: "Grupo 1000"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: false
+    toc_depth: 3
+    number_sections: false
+    df_print: paged
+  html_notebook:
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+    number_sections: yes
+    theme: yeti
+---
+
+# ***Alumnos del grupo:***
+
++-------------------------------------------+---------------+---------------------------------+---------------------------+
+| Alumno                                    | **Código**    | **Correo**                      | **Porcentaje de Trabajo** |
++===========================================+===============+=================================+===========================+
+| ***Bad Bunny***                           | **202020081** | **juan.vega\@utec.edu.pe**      | **10%**                   |
++-------------------------------------------+---------------+---------------------------------+---------------------------+
+| **Shaquira **                             | **201610002** | **María.salinas\@utec.edu.pe**  | **20%**                   |
++-------------------------------------------+---------------+---------------------------------+---------------------------+
+| **Caballito Hurtado**                     | **201610002** | **María.salinas\@utec.edu.pe**  | **100%**                  |
++-------------------------------------------+---------------+---------------------------------+---------------------------+
+| **Chriss Martin de Coldplay**             | **201610002** | **María.salinas\@utec.edu.pe**  | **100%**                  |
++-------------------------------------------+---------------+---------------------------------+---------------------------+
+## JIJIJJA
+### PIPIPI 
+#### SEXOOOO
+# **Tema: Café y salúd**
+Tener presente que para separar líneas escritas, se debe poner doble espació al final del texto.  
+El ***café es muy agradable***.  
+
+# Ejemplo de tabla
+
+| Integrantes  | Edad  | Aficiones | Signo |
+|:--------------:|:-------:|:-----------:|:-----|
+| Juan Carlos  | 18 | Fútbol  | tauro |
+| María Gracia| 19    |Natación   | Leo |
+| Luciano| 21    | Ajedrez | Escorpio |
+
+
+# **Introducción**
+
+Según estudios recientes el café tiene muchas propiedades muy buenas para la salud.  
+El café estimula al cerebro y se tiene menos posibilidades de adquirir enfermedades que hoy en día dañan al cerebro.
+
+# **Objetivo**
+
+El objetivo del presente proyecto es probar que el café no es malo para la salud. Es delicioso y aromático.
+
+
+
+
+
+# **USANDO COLORES**
+
+<span style="color:red"> El texto que sigue será en ***rojo y además en cursiva***. </span>   
+<span style="color:orange"> El texto siguiente será en *naranja  y además en cursiva*. </span>   
+<span style="color:green"> El texto siguiente será en *verde  y además en cursiva*. </span> 
+
+
+| Integrantes  | Edad  | Aficiones | Signo |
+|:--------------:|:-------:|:-----------:|:-----|
+| Juan Carlos  | 18 | Fútbol  | tauro |
+| María Gracia| 19    |Natación   | Leo |
+| Luciano| 21    | Ajedrez | Escorpio |
+
+
+
