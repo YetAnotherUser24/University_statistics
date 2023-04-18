@@ -1,0 +1,186 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r}
+library(readr)
+A <- c(2,4,4,4,7,8,8,8,8,8,10,10)
+DD <- read.csv("Datos_Diversos.csv")
+```
+## Media
+```{r}
+mean(A)
+```
+
+## Mediana
+```{r}
+median(A)
+```
+
+## Moda
+```{r}
+table(A)
+```
+
+## Summarize
+```{r}
+summary(A)
+```
+### Intrepretación
+__Min = 2__ ==> El dato mínimo de A es 2.
+
+__Máx = 10__ ==> El dato máximo de A es 10.
+
+__Mean = 6.75__ ==> El promedio de todos los datos de A es 6.75.
+
+__Median = 8__ ==> La mediana de los datos de A es 8.
+
+__Quartil 1 = 4__ ==> El cuartil 1 de los datos de A es 4.
+
+__Quartil 3 = 8__ ==> El cuartil 3 de los datos de A es 8.
+
+### Ejemplo
+
+```{r}
+summary(cars$dist)
+table(cars$dist)
+```
+### Interpretación
+
+__Mean = 42.98__ ==> La distancia promedio de frenado es 42.98 metros.
+
+__Mediana = 36__ ==> La mayor distancia del 50% de las menores distancia de frenado o la menor
+distancia de frenado del 50% de las mayores distancias es 36 metros.
+
+__Q1 = 26__ ==> La mayor distancia de frenado del 25% inferior de las distancias es 26 metros o la
+menor distancia de frenado del 75% superior de las distancias es 26 metros.
+
+__Moda = 26__ ==> La distancia de frenado más frecuente es 26 metros y su frecuencia modal es 4.
+
+Nota: Puede haber muchas modas para una variable. Si hay una sola moda, se le llamará unimodal. Si
+hay dos modas se llamará bimodal. Y en general si hay varias modas, se llamará multimodal. También
+puede no haber moda (1,2,3,4,5).
+
+======================================================================================================
+
+# DESCRIPTORES NUMÉRICOS PARA BASE DE DATOS:
+```{r}
+DD <- read.csv("Datos_Diversos.csv")
+```
+# Dimensión de la base de datos
+
+Es decir obtener # de filas y # de columnas
+```{r}
+dim(DD)
+
+nrow(DD)
+ncol(DD)
+```
+
+## Significado:
+Hay 2225 filas u observaciones o unidades muestrales
+
+Hay 20 columnas o variables
+
+Se debería tener 2225 x 20 = 44500 datos o celdas. (Entre celdas llenas y celdas vacías)
+
+## Instalando plyr y dplyr
+```{r}
+library(plyr)
+library(dplyr)
+```
+
+## Tipos de variables
+
+```{r}
+glimpse(DD)
+```
+## Para modificar la clase de la variable
+
+```{r}
+class(DD$Estatura..cm.)
+class(DD$Apellido)
+```
+
+columna de cualitativo a numérico. df$a <- as.numeric(df$a)
+columna de numérico a cualitativo. df$a <- as.character(df$a)
+
+```{r}
+DD$Ciclo <- as.character(DD$Ciclo)
+DD$Edad <- as.numeric(DD$Edad)
+DD$Estatura..cm. <- as.numeric(DD$Estatura..cm.)
+DD$Peso..kg. <- as.numeric(DD$Peso..kg.)
+DD$Tiempo.de.reacción <- as.numeric(DD$Tiempo.de.reacción)
+DD$Talla.de.zapato <- as.numeric(DD$Talla.de.zapato)
+```
+
+Veamos como esta el tipo de variable:
+```{r}
+glimpse(DD)
+```
+```{r}
+library(tidyr)
+library(tidyverse)
+```
+
+```{r}
+str(DD)
+summary(DD)
+```
+
+## Descriptores de edad
+
+```{r}
+summary(DD$Edad)
+```
+
+## Cuantiles
+
+Los cuantiles permiten calcular datos que forman un p% desde la izquierda (desde los menores).
+La función cuantil se obtiene mediante: 'quantile(x, probs, na.rm, FALSE)'
+na.rm remueve los NA, es recomendable poner en TRUE.
+
+```{r}
+quantile(cars$speed, 0.9) #Estoy hallando la mayor velocidad del 90% de las menores velocidades
+quantile(cars$speed, 0.9, na.rm=F)
+quantile(cars$speed, 0.9, na.rm=TRUE)
+
+#Aqui en cars, da lo mismo poner T o F, pues Cars no tiene datos NA y nada se va a remover
+```
+## Interpretacion
+
+1) La mayor velocidad del 90% de las menores velocidades es 23.1 ===> Verdadero
+2) La mayor velocidad del 90% de los vehículos más rápidos es 23.1 ===> Falso
+3) La mayor velocidad del 90% de los vehículos más lentos es 23.1 ===> Verdadero
+4) La menor velocidad del 10% de los vehículos más rápidos es 23.1 ===> Verdadero
+5) La menor velocidad del 10% de los vehículos más lentos es 23.1 ===> Falso
+
+## Otro ejemplo
+```{r}
+quantile(DD$Edad, 0.5, T) #50% medido desde la izquierda: mediana = cuartil2. Con true se ignora los NA's
+quantile(DD$Edad, 0.25, T) #25% medido desde la izquierda: Cuartil 1. Con True se ignora los NA's
+quantile(DD$Edad, 0.8, T) #80% medido desde la izuiqerda.
+```
+
+```{r}
+table(DD$Edad)
+```
+
+## Tabla cruzada
+
+```{r}
+table(DD$Período, DD$Ciclo)
+```
+
+
+```{r}
+
+```
+
+
+
+
