@@ -9,7 +9,7 @@ output:
 ```{r}
 library(readr)
 A <- c(2,4,4,4,7,8,8,8,8,8,10,10)
-DD <- read.csv("Datos_Diversos.csv")
+DD <- read.csv("Datos_Diversos.csv", encoding = "UTF-8")
 ```
 ## Media
 ```{r}
@@ -177,10 +177,76 @@ table(DD$Período, DD$Ciclo)
 ```
 
 
-```{r}
+## Cambiando nombres
 
+```{r}
+DDR <- rename(DD, Estatura = 'Estatura..cm.', Peso = 'Peso..kg.', Signo = 'Signo.del.zodiaco',
+              Reacción = 'Tiempo.de.reacción', Videojuegos = 'Juega.videojuegos', Deporte = 'Hace.deporte', 
+              Color = 'Color.favorito', Calzado = 'Talla.de.zapato', Polo = 'Talla.de.polo')
 ```
 
+## Veamo como quedo la nueva base de datos
+
+```{r}
+names(DDR)
+```
+## Funcion select
+
+Cual es su cantidad de filas llenas?
+
+```{r}
+
+DDRS <- select(DDR, Período:Indicaciones)
+sum(complete.cases(DDRS))
+```
+```{r}
+select(DDR, starts_with('S'))
+```
+```{r}
+select(DDR, ends_with('no'))
+```
+
+```{r}
+select(DDR, contains("tu"))
+```
+
+Recordar:
+
+La media ($\overline{X}$ es para variables ...cuantitativas (usando: mean))
+La mediana es para variables ...cuantitativas y cualitativas ordinales (summary)
+La moda es para variables ...cuantitativas y cualitativas (usando: table)
+
+Categoricas:
+```{r}
+Letras <- c("a","b","c","d","e","f","g","h","i","j")
+```
+
+Se puede hallar su mediana y cuantiles
+```{r}
+quantile(Letras, 0.25, type=3)
+quantile(Letras, 0.5, type=3)
+quantile(Letras, 0.75, type = 3)
+```
+```{r}
+quantile(Letras, probs=c(0.25,0.5,0.75,0.9), type=3)
+```
+## Descriptores de dispersión:
+La dispersion equivale a la variabilidad de los datos o a la separacion de datos.
+Mayor separación: Más dispersión
+Menor separación: Menor dispersión
+
+```{r}
+Ncalc <- c(6,8,8,8,10,10,19,20,20)
+Nestad <- c(9,10,10,12,13,13,13,14,14,14)
+```
+
+Las notas en estadistica de A están con mayor dispersión que las notas en B.
+
+¿Qué conjunto tiene mayor dispersion?
+
+1) Rango: $R = máx - min $
+2) Rango intercuaril: $Q_{3}-Q_{1}$
+3) varianza: $V(x)=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}(n-1)}$
 
 
 
