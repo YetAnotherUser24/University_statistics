@@ -246,7 +246,19 @@ Las notas en estadistica de A están con mayor dispersión que las notas en B.
 
 1) Rango: $R = máx - min $
 2) Rango intercuaril: $Q_{3}-Q_{1}$
-3) varianza: $V(x)=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}(n-1)}$
+3) varianza: $V(x)=\frac{\sum_{i=1}^{n}(x_{i}-\overline{X})^{2}}{n-1}$
+4) Desviación estándar: $S = \sqrt({V(X)}$
+5) Coeficiente de variación: $CV = \frac{S}{\overline{X}}*100%$
+
+Si CV(A) > CV(B) se puede afirmar:
+- B tiene menor dispersión relativa
+- Más homogeneo o más uniforme es B
+- Más heterogéneo es A.
+
+Con R studio:
+
+
+
 
 
 
