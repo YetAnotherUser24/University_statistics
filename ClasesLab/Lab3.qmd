@@ -8,6 +8,10 @@ editor: visual
 
 Es recomendable limpiar el ambiente al iniciar un nuevo laboratorio. Usamos el comando rm(list=ls()) desde la consola.
 
+```{r}
+rm(list=ls())
+```
+
 ## Cargar librerías
 
 Para cargar una librería y poder usarla usamos la función library.
@@ -19,7 +23,7 @@ library(readr)
 ## Para leer una base de datos
 
 ```{r}
-DF <- read_csv("DatosDiversos.csv")
+DF <- read_csv("Datos_Diversos.csv")
 ```
 
 Importante: NO USAR JAMÁS la función read.csv de R básico.
@@ -35,18 +39,19 @@ Lo primero que debemos hacer es cambiar el nombre de las variables. Se recomiend
 Se recomienda usar la función rename de la librería dplyr para cambiar el nombre a las variables.
 
 ```{r}
+library(plyr)
 library(dplyr)
 ```
 
 Ahora cambiemos el nombre de las variables.
 
 ```{r}
-DF %>% rename(Periodo = Período, Seccion = Sección, Estatura = `Estatura (cm)`, Peso = `Peso (kg)`, Signo = `Signo del zodiaco`,Tiempo = `Tiempo de reacción`, Video = `Juega videojuegos`, Deporte = `Hace deporte`, Color = `Color favorito`, Zapato = `Talla de zapato`, Polo = `Talla de polo`, SO = `Sistema operativo`, Fecha = `Fecha de nacimiento`) -> DFN
+DFN <- dplyr::rename(DF, Periodo = 'Período', Seccion = 'Sección', Estatura = 'Estatura (cm)', Peso = 'Peso (kg)', Signo = 'Signo del zodiaco',Tiempo = 'Tiempo de reacción', Video = 'Juega videojuegos', Deporte = 'Hace deporte', Color = 'Color favorito', Zapato = 'Talla de zapato', Polo = 'Talla de polo', SO = 'Sistema operativo', Fecha = 'Fecha de nacimiento') 
 ```
 
 Para ver el DataFrame:
 
-```{r}
+```{r eval=FALSE, echo=FALSE}
 DFN
 ```
 
@@ -59,7 +64,9 @@ nrow(DFN)
 Para saber cuántas columnas o variables tiene la base de datos.
 
 ```{r}
-ncol(DFN)   # indica el número de variables que tiene la data    
+ncol(DFN)   # indica el número de variables que tiene la data 
+
+dim(DFN) # devuelve el numero de observaciones x el numero de columnas
 ```
 
 Para acceder al valor que tiene una posición particular en la data.
@@ -112,4 +119,146 @@ Hay funciones en R que tienen su negación (la ! antes de la función que se qui
 
 ```{r}
 sum(!complete.cases(DFN))
+```
+
+## Limpieza de datos
+
+Lo primero que debemos observar es que en el archivo Datos Diversos que llenamos solo habían 18 columnas (llegaban hasta la columna indicaciones), sin embargo el DataFrame tiene 20 columnas y todas con valores NA (la data se "embasuró" con 2 columnas vacías. También podemos observar que hay filas vacías entre la fila 1928 y 2223. Hay que eliminar tanto las columnas vacías como las filas vacías.
+
+Primero eliminemos las columnas 19 y 20. Hagamos un resumen del DataFrame
+
+```{r}
+summary(DFN)
+```
+
+Para eliminar columnas usaremos la función select de la librería dplyr
+
+```{r}
+DFN <- select(DFN,-...19) #Se elimina la columna 19
+DFN <- select(DFN,-...20) #Se elimina la columna 20
+```
+
+También se puede eliminar un rango de columnas, por ejemplo, queremos eliminar las columnas entre la columna A y la columna B
+
+```{r}
+#select(DFN,-a:-b)
+```
+
+Ahora eliminamos las filas vacías.
+
+```{r}
+v <- c(1:5) #crea el vector con elementos desde 1 hasta 5
+v
+```
+
+```{r}
+filas_a_eliminar <- c(1928:2223)
+DFN <- DFN[-filas_a_eliminar,]
+```
+
+```{r}
+DFN <- DFN[-1929,]
+```
+
+```{r}
+sum(is.na(DFN)) #suma todos los NA en la data
+```
+
+```{r}
+sum(complete.cases(DFN))
+```
+
+Noten que al eliminar las filas y columnas y vacías tenemos que las observaciones completas pasaron de 0 a 602
+
+Hagamos un resumen de observaciones completas e incompletas.
+
+```{r}
+table(complete.cases(DFN))
+```
+
+## Limpieza de la variable Estatura
+
+```{r}
+summary(DFN$Estatura)
+```
+
+Claramente 1.2 y 1653 son datos atípicos irreales ya que ningún ser humano puede tener esas medidas. Veamos si hay pocos o muchos datos atípicos irreales.
+
+```{r}
+plot(DFN$Estatura)
+```
+
+```{r}
+DFN[which(DFN$Estatura<100),5]
+```
+
+```{r}
+table(DFN$Estatura<100)
+```
+
+```{r}
+DFN$Estatura[DFN$Estatura < 100] <- NA
+DFN$Estatura[DFN$Estatura > 273] <- NA
+```
+
+```{r}
+summary(DFN$Estatura)
+```
+
+## Limpieza de la variable Video
+
+```{r}
+table(DFN$Video)
+```
+
+Claramente en este caso solo debieron haber dos posibles respuestas Si y No. Uniformemos esas respuestas.
+
+```{r}
+DFN$Video[DFN$Video %in% c("no","NO")] <- "No"
+DFN$Video[DFN$Video %in% c("SI","sí","Sí","SÍ","si")] <- "Si"
+```
+
+```{r}
+table(DFN$Video)
+```
+
+## Limpieza de la variable Peso
+
+```{r}
+table(DFN$Peso)
+```
+
+Sustituiremos por NA los "-" y el "90k" y redondear los valores al entero más cercano
+
+```{r}
+DFN$Video[DFN$Video %in% c("-","90k")] <- NA
+DFN$Video <- as.numeric(DFN$Video)
+DFN$Video <- round(DFN$Video)
+```
+
+## Limpieza de la variable Signo
+
+```{r}
+table(DFN$Signo)
+```
+
+```{r}
+DFN$Signo[DFN$Signo %in% c("-","Ofiuco","Escorpio/Libra","Abril","No tengo", "Desconocido", "Leo ?")] <- NA
+
+DFN$Signo[DFN$Signo %in% c("acuario","Acurio")] <- "Acuario"
+DFN$Signo[DFN$Signo %in% c("Arias","aries")] <- "Aries"
+DFN$Signo[DFN$Signo %in% c("cancer","cáncer","Cancer")] <- "Cáncer"
+DFN$Signo[DFN$Signo %in% c("Capricorinio","capricornio","CApricornio","Capricornip","Capriorno","Capriornio","Caprocornio")] <- "Capricornio"
+DFN$Signo[DFN$Signo %in% c("escorpio","Escorpion","eskorpio","Scorpio")] <- "Escorpio"
+DFN$Signo[DFN$Signo %in% c("Gemenis","geminis","Geminis")] <- "Géminis"
+DFN$Signo[DFN$Signo %in% c("leo")] <- "Leo"
+DFN$Signo[DFN$Signo %in% c("libra","LIBRA")] <- "Libra"
+DFN$Signo[DFN$Signo %in% c("picis","Picis","piscis","Pisicis","pisics","Pisis")] <- "Piscis"
+DFN$Signo[DFN$Signo %in% c("sagitario","Sagitatio")] <- "Sagitario"
+DFN$Signo[DFN$Signo %in% c("tauro")] <- "Tauro"
+DFN$Signo[DFN$Signo %in% c("Viego","virgo","VIrgo")] <- "Virgo"
+```
+
+```{r}
+table(DFN$Signo)
 ```
