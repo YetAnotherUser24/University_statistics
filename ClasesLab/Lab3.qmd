@@ -262,3 +262,105 @@ DFN$Signo[DFN$Signo %in% c("Viego","virgo","VIrgo")] <- "Virgo"
 ```{r}
 table(DFN$Signo)
 ```
+
+# Función Select
+
+Selecciona columnas del dataframe
+
+3.  Seleccionar por coincidencias de patrones
+
+    ```{r}
+    select(DFN, starts_with("Pe")) #selecciona de DFN las variables que comienzan con "Pe"
+
+    select(DFN, ends_with("lo")) #selecciona de DFN las variables que terminan en "lo"
+
+    select(DFN, contains("po")) #selecciona de DFN las variables que contienen "po"
+
+    ```
+
+# Función Filter
+
+Selecciona filas del dataframe
+
+```{r}
+filter(DFN, Seccion==9)
+
+```
+
+```{r}
+filter(DFN, Seccion==9.01)
+filter(DFN, Seccion==9.01 & Periodo==2023-1)
+filter(DFN, (Seccion == 9.01 | Seccion == 9) & Periodo == "2023-1")
+
+filter(DFN, Seccion==9.01 & Edad %in% c(17,18) & Signo %in% c("Acuario","Tauro"))
+```
+
+# Mutate y Transmute
+
+Sirve para crear nuevas variables (columnas)
+
+```{r}
+x1 <- c(1,2,3,4)
+x2 <- c(2,3,4,8)
+DF3 <- data.frame(x1,x2) # Crea un DataFrame con columnas x1 y x2
+
+DF3 <- mutate(DF3, x3=x1+x2) # Genera una nueva columna x3 que es la suma de la columna x1 y x2
+
+transmute(DF3, x4 = 2*x1 + x2 - x3) # Genera una nueva columna sin conservar las originales
+```
+
+# Arrange
+
+Se utiliza para reordenar filas de un DataFrame de acuerdo a o más variables (columnas)
+
+```{r}
+arrange(DFN, Edad)
+```
+
+# Summarise
+
+Con esta función podemos obtener determinados datos estadísticos de una variable
+
+```{r}
+DF3 %>% summarise(media = mean(x1)) # retorna un único valor que es la media de la variable x1
+DF3 %>% summarise(maximo = max(x3)) # retorna un único valor que es el máximo de la variable x3
+DF3 %>% summarise(nn=n()) #retorna un único valor que es el numero de filas del DF de DF3
+```
+
+# Pipe (%\>%)
+
+Este operador es básico ya que permite encadenar llamadas o funciones para así realizar de forma sencilla transformaciones de datos complejos.
+
+Lo que hace este operador es pasar el elemento que esta a su izquierda como un argumento de la función que tiene a la derecha
+
+```{r}
+DFN %>% filter(Edad>40)
+
+```
+
+# Group
+
+Permite agrupar filas en función de una o varias condiciones.
+
+```{r}
+group_by(DFN, Sexo)
+```
+
+```{r}
+DFN %>% filter(Edad>4) %>% group_by(Video) 
+```
+
+# Ifelse
+
+La función ifelse nos permite vectorizar un condicional (if, else). En lugar de escribir una línea de código para cada comparación, podemos usar una sola llamada a esta función, que se aplicará a todos los elementos de un vector.
+
+```{r}
+v <- 1:10
+ifelse(v<3, "T", "F")
+
+ifelse(v %% 2 == 0, "Par", "Impar")
+```
+
+El primer termino es la condición, el segundo que se hace si es verdadero y el tercero que se hace si es falso
+
+Tarea: Periodo if else, mutate
