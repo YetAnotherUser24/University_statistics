@@ -270,7 +270,7 @@ unique(DDRS$Carrera)
 ```{r}
 a <-  filter(DDRS, Edad < 25, Signo == "tauro" | Signo == "Tauro")
 table(a$Edad)
-stem(a)
+stem(log(a$Edad))
 ```
 2) Si se desea seleccionar personas que midan almenos 175 cm y su talla d epolo sea almenos L
 ```{r}
@@ -282,6 +282,69 @@ a
 
 ```
 
+## Library String
+```{r}
+library(stringr)
+#Sirve para modificar y controlar caracteres
+```
+
+```{r}
+Sexomin <- tolower(DDRS$Sexo)
+unique(Sexomin)
+```
+```{r}
+Sexomax <- toupper(Sexomin)
+```
 
 
+
+Chancando en la misma columna
+
+```{r}
+DDRS$Sexo <- str_to_lower(DDRS$Sexo, locale = "es") #minuscula
+unique(DDRS$Sexo)
+
+DDRS$Sexo <- str_to_upper(DDRS$Sexo, locale = "es") #mayuscula
+unique(DDRS$Sexo)
+```
+
+Modificamos la escritura de respuestas que son evidentes mal escritas:
+
+con MUTATE se crea nuevas columnas y se guarda al final de la base de datos
+
+```{r}
+DDRS1 <- mutate(DDRS, Sexcor = case_when(Sexo == "" ~'no especifica', Sexo == "MM"~'M', Sexo == "NB"~"desconocido", Sexo == "M" ~ "M", Sexo == "F"~"F", Sexo=="L" ~ "desconocido"))
+
+DDRS1
+```
+
+```{r}
+table(DDRS1$Sexcor)
+table(DDRS1$Sexcor, useNA = "always")
+```
+
+Ahora sí ya se puede hacer el grafico circular
+```{r}
+frec <- c(2,554,1311, 3) # Frecuencias de sexo corregido
+frec
+```
+
+```{r}
+pie(frec) # antihorario clockwise=F
+```
+Con sus frecuencias
+
+```{r}
+frec = c(500,1000,400,80)
+pie(frec, labels=frec, col= c("white","blue","yellow","green"))
+legend("topleft", legend=c("Desconocido","Femenino","Masculino","no especifica"), fill = c("white","lightblue","mistyrose","lightgreen"))
+```
+```{r}
+library(plotrix)
+```
+
+```{r}
+pie3D(frec, labels=frec, col= c("white","lightblue","mistyrose","lightgreen"))
+legend("topleft", legend=c("Desconocido","Femenino","Masculino","no especifica"), fill = c("white","lightblue","mistyrose","lightgreen"), title=("SEXOOOOOOO"))
+```
 
