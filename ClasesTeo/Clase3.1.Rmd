@@ -345,6 +345,544 @@ library(plotrix)
 
 ```{r}
 pie3D(frec, labels=frec, col= c("white","lightblue","mistyrose","lightgreen"))
-legend("topleft", legend=c("Desconocido","Femenino","Masculino","no especifica"), fill = c("white","lightblue","mistyrose","lightgreen"), title=("SEXOOOOOOO"))
+legend("topright", legend=c("Desconocido","Femenino","Masculino","no especifica"), fill = c("white","lightblue","mistyrose","lightgreen"), title=("SEXO"))
 ```
+## Diagrama de Cajas
+
+se hace para cuantativas
+
+Un diagrama de cajas, contiene la información resuida en base a 5 numeros importantes
+Min, Cuartil 1, Mediana, Cuartil 3, Max.
+
+Diagrama de cajas para la edad
+
+```{r}
+summary(DDRS1$Edad)
+```
+
+```{r}
+boxplot(DDRS1$Edad)
+
+```
+```{r}
+boxplot(DDRS1$Edad, col="lightblue", horizontal = TRUE)
+```
+Aqui existen varios puntos (bolitas en blanco) que significan que estan muy distanciados o aislados del resto de puntos.
+
+con los puntos:
+```{r}
+boxplot(DDRS1$Edad,col = "lightblue", horizontal = TRUE, xlab="Edad en años")
+stripchart(DDRS1$Edad, method = "jitter", pch=19, add = TRUE, col = "purple")
+```
+
+## Uso de Factor
+
+Las variables cualitativas pueden quedar muy bien definidas como datos categóricos si se transforman a factor:
+```{r}
+Fsexcor <- factor(DDRS1$Sexcor)
+Fsexcor
+```
+## Plot
+
+Plot hace un diagrama formado por rectangulos si es que la variable es factor(cualitativos). Plot si acepta variable numerica y lo que origina es un diagrama del tipo "dispersion"
+```{r}
+
+plot(DDRS1$Edad) #aquila variable es cuantitiva y produce una nube de puntos
+```
+
+```{r}
+plot(Fsexcor)
+```
+```{r}
+tabsexo <- table(DDRS1$Sexcor)
+
+barp<- barplot(tabsexo, main = "Gráfico de barras de Sexo", col = c("white","yellow","red"),xlab = "Sexo", ylab = "Frecuencia absoluta")
+```
+
+
+
+
+
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r}
+library(readr)
+A <- c(2,4,4,4,7,8,8,8,8,8,10,10)
+DD <- read.csv("Datos_Diversos.csv", encoding = "UTF-8")
+```
+## Media
+```{r}
+mean(A)
+```
+
+## Mediana
+```{r}
+median(A)
+```
+
+## Moda
+```{r}
+table(A)
+```
+
+## Summarize
+```{r}
+summary(A)
+```
+### Intrepretación
+__Min = 2__ ==> El dato mínimo de A es 2.
+
+__Máx = 10__ ==> El dato máximo de A es 10.
+
+__Mean = 6.75__ ==> El promedio de todos los datos de A es 6.75.
+
+__Median = 8__ ==> La mediana de los datos de A es 8.
+
+__Quartil 1 = 4__ ==> El cuartil 1 de los datos de A es 4.
+
+__Quartil 3 = 8__ ==> El cuartil 3 de los datos de A es 8.
+
+### Ejemplo
+
+```{r}
+summary(cars$dist)
+table(cars$dist)
+```
+### Interpretación
+
+__Mean = 42.98__ ==> La distancia promedio de frenado es 42.98 metros.
+
+__Mediana = 36__ ==> La mayor distancia del 50% de las menores distancia de frenado o la menor
+distancia de frenado del 50% de las mayores distancias es 36 metros.
+
+__Q1 = 26__ ==> La mayor distancia de frenado del 25% inferior de las distancias es 26 metros o la
+menor distancia de frenado del 75% superior de las distancias es 26 metros.
+
+__Moda = 26__ ==> La distancia de frenado más frecuente es 26 metros y su frecuencia modal es 4.
+
+Nota: Puede haber muchas modas para una variable. Si hay una sola moda, se le llamará unimodal. Si
+hay dos modas se llamará bimodal. Y en general si hay varias modas, se llamará multimodal. También
+puede no haber moda (1,2,3,4,5).
+
+======================================================================================================
+
+# DESCRIPTORES NUMÉRICOS PARA BASE DE DATOS:
+```{r}
+DD <- read.csv("Datos_Diversos.csv")
+```
+# Dimensión de la base de datos
+
+Es decir obtener # de filas y # de columnas
+```{r}
+dim(DD)
+
+nrow(DD)
+ncol(DD)
+```
+
+## Significado:
+Hay 2225 filas u observaciones o unidades muestrales
+
+Hay 20 columnas o variables
+
+Se debería tener 2225 x 20 = 44500 datos o celdas. (Entre celdas llenas y celdas vacías)
+
+## Instalando plyr y dplyr
+```{r}
+library(plyr)
+library(dplyr)
+```
+
+## Tipos de variables
+
+```{r}
+glimpse(DD)
+```
+## Para modificar la clase de la variable
+
+```{r}
+class(DD$Estatura..cm.)
+class(DD$Apellido)
+```
+
+columna de cualitativo a numérico. df$a <- as.numeric(df$a)
+columna de numérico a cualitativo. df$a <- as.character(df$a)
+
+```{r}
+DD$Ciclo <- as.character(DD$Ciclo)
+DD$Edad <- as.numeric(DD$Edad)
+DD$Estatura..cm. <- as.numeric(DD$Estatura..cm.)
+DD$Peso..kg. <- as.numeric(DD$Peso..kg.)
+DD$Tiempo.de.reacción <- as.numeric(DD$Tiempo.de.reacción)
+DD$Talla.de.zapato <- as.numeric(DD$Talla.de.zapato)
+```
+
+Veamos como esta el tipo de variable:
+```{r}
+glimpse(DD)
+```
+```{r}
+library(tidyr)
+library(tidyverse)
+```
+
+```{r}
+str(DD)
+summary(DD)
+```
+
+## Descriptores de edad
+
+```{r}
+summary(DD$Edad)
+```
+
+## Cuantiles
+
+Los cuantiles permiten calcular datos que forman un p% desde la izquierda (desde los menores).
+La función cuantil se obtiene mediante: 'quantile(x, probs, na.rm, FALSE)'
+na.rm remueve los NA, es recomendable poner en TRUE.
+
+```{r}
+quantile(cars$speed, 0.9) #Estoy hallando la mayor velocidad del 90% de las menores velocidades
+quantile(cars$speed, 0.9, na.rm=F)
+quantile(cars$speed, 0.9, na.rm=TRUE)
+
+#Aqui en cars, da lo mismo poner T o F, pues Cars no tiene datos NA y nada se va a remover
+```
+## Interpretacion
+
+1) La mayor velocidad del 90% de las menores velocidades es 23.1 ===> Verdadero
+2) La mayor velocidad del 90% de los vehículos más rápidos es 23.1 ===> Falso
+3) La mayor velocidad del 90% de los vehículos más lentos es 23.1 ===> Verdadero
+4) La menor velocidad del 10% de los vehículos más rápidos es 23.1 ===> Verdadero
+5) La menor velocidad del 10% de los vehículos más lentos es 23.1 ===> Falso
+
+## Otro ejemplo
+```{r}
+quantile(DD$Edad, 0.5, T) #50% medido desde la izquierda: mediana = cuartil2. Con true se ignora los NA's
+quantile(DD$Edad, 0.25, T) #25% medido desde la izquierda: Cuartil 1. Con True se ignora los NA's
+quantile(DD$Edad, 0.8, T) #80% medido desde la izuiqerda.
+```
+
+```{r}
+table(DD$Edad)
+```
+
+## Tabla cruzada
+
+```{r}
+table(DD$Período, DD$Ciclo)
+```
+
+
+## Cambiando nombres
+
+```{r}
+DDR <- rename(DD, Estatura = 'Estatura..cm.', Peso = 'Peso..kg.', Signo = 'Signo.del.zodiaco',
+              Reacción = 'Tiempo.de.reacción', Videojuegos = 'Juega.videojuegos', Deporte = 'Hace.deporte', 
+              Color = 'Color.favorito', Calzado = 'Talla.de.zapato', Polo = 'Talla.de.polo')
+```
+
+## Veamo como quedo la nueva base de datos
+
+```{r}
+names(DDR)
+```
+## Funcion select
+
+Cual es su cantidad de filas llenas?
+
+```{r}
+
+DDRS <- select(DDR, Período:Indicaciones)
+sum(complete.cases(DDRS))
+```
+```{r}
+select(DDR, starts_with('S'))
+```
+```{r}
+select(DDR, ends_with('no'))
+```
+
+```{r}
+select(DDR, contains("tu"))
+```
+
+Recordar:
+
+La media ($\overline{X}$ es para variables ...cuantitativas (usando: mean))
+La mediana es para variables ...cuantitativas y cualitativas ordinales (summary)
+La moda es para variables ...cuantitativas y cualitativas (usando: table)
+
+Categoricas:
+```{r}
+Letras <- c("a","b","c","d","e","f","g","h","i","j")
+```
+
+Se puede hallar su mediana y cuantiles
+```{r}
+quantile(Letras, 0.25, type=3)
+quantile(Letras, 0.5, type=3)
+quantile(Letras, 0.75, type = 3)
+```
+```{r}
+quantile(Letras, probs=c(0.25,0.5,0.75,0.9), type=3)
+```
+## Descriptores de dispersión:
+La dispersion equivale a la variabilidad de los datos o a la separacion de datos.
+Mayor separación: Más dispersión
+Menor separación: Menor dispersión
+
+```{r}
+Ncalc <- c(6,8,8,8,10,10,19,20,20)
+Nestad <- c(9,10,10,12,13,13,13,14,14,14)
+```
+
+Las notas en estadistica de A están con mayor dispersión que las notas en B.
+
+¿Qué conjunto tiene mayor dispersion?
+
+1) Rango: $R = máx - min $
+2) Rango intercuaril: $Q_{3}-Q_{1}$
+3) varianza: $V(x)=\frac{\sum_{i=1}^{n}(x_{i}-\overline{X})^{2}}{n-1}$
+4) Desviación estándar: $S = \sqrt({V(X)}$
+5) Coeficiente de variación: $CV = \frac{S}{\overline{X}}*100%$
+
+Si CV(A) > CV(B) se puede afirmar:
+- B tiene menor dispersión relativa
+- Más homogeneo o más uniforme es B
+- Más heterogéneo es A.
+
+
+## Unique
+
+Sirve para ver todas las respuestas únicas
+```{r}
+unique(DDRS$Signo)
+```
+```{r}
+unique(DDRS$Carrera)
+```
+
+1) Hallar los alumnos con edad menos de 18 y con signo del toro
+```{r}
+a <-  filter(DDRS, Edad < 25, Signo == "tauro" | Signo == "Tauro")
+table(a$Edad)
+stem(log(a$Edad))
+```
+2) Si se desea seleccionar personas que midan almenos 175 cm y su talla d epolo sea almenos L
+```{r}
+unique(DDRS$Polo)
+```
+```{r}
+a <- filter(DDRS, Polo %in% c("L","XL","XXL","l","xl","Xl"), Estatura>=175)
+a
+
+```
+
+## Library String
+```{r}
+library(stringr)
+#Sirve para modificar y controlar caracteres
+```
+
+```{r}
+Sexomin <- tolower(DDRS$Sexo)
+unique(Sexomin)
+```
+```{r}
+Sexomax <- toupper(Sexomin)
+```
+
+
+
+Chancando en la misma columna
+
+```{r}
+DDRS$Sexo <- str_to_lower(DDRS$Sexo, locale = "es") #minuscula
+unique(DDRS$Sexo)
+
+DDRS$Sexo <- str_to_upper(DDRS$Sexo, locale = "es") #mayuscula
+unique(DDRS$Sexo)
+```
+
+Modificamos la escritura de respuestas que son evidentes mal escritas:
+
+con MUTATE se crea nuevas columnas y se guarda al final de la base de datos
+
+```{r}
+DDRS1 <- mutate(DDRS, Sexcor = case_when(Sexo == "" ~'no especifica', Sexo == "MM"~'M', Sexo == "NB"~"desconocido", Sexo == "M" ~ "M", Sexo == "F"~"F", Sexo=="L" ~ "desconocido"))
+
+DDRS1
+```
+
+```{r}
+table(DDRS1$Sexcor)
+table(DDRS1$Sexcor, useNA = "always")
+```
+
+Ahora sí ya se puede hacer el grafico circular
+```{r}
+frec <- c(2,554,1311, 3) # Frecuencias de sexo corregido
+frec
+```
+
+```{r}
+pie(frec) # antihorario clockwise=F
+```
+Con sus frecuencias
+
+```{r}
+frec = c(500,1000,400,80)
+pie(frec, labels=frec, col= c("white","blue","yellow","green"))
+legend("topleft", legend=c("Desconocido","Femenino","Masculino","no especifica"), fill = c("white","lightblue","mistyrose","lightgreen"))
+```
+```{r}
+library(plotrix)
+```
+
+```{r}
+pie3D(frec, labels=frec, col= c("white","lightblue","mistyrose","lightgreen"))
+legend("topright", legend=c("Desconocido","Femenino","Masculino","no especifica"), fill = c("white","lightblue","mistyrose","lightgreen"), title=("SEXO"))
+```
+## Diagrama de Cajas
+
+se hace para cuantativas
+
+Un diagrama de cajas, contiene la información resuida en base a 5 numeros importantes
+Min, Cuartil 1, Mediana, Cuartil 3, Max.
+
+Diagrama de cajas para la edad
+
+```{r}
+summary(DDRS1$Edad)
+```
+
+```{r}
+boxplot(DDRS1$Edad)
+
+```
+```{r}
+boxplot(DDRS1$Edad, col="lightblue", horizontal = TRUE)
+```
+Aqui existen varios puntos (bolitas en blanco) que significan que estan muy distanciados o aislados del resto de puntos.
+
+con los puntos:
+```{r}
+boxplot(DDRS1$Edad,col = "lightblue", horizontal = TRUE, xlab="Edad en años")
+stripchart(DDRS1$Edad, method = "jitter", pch=19, add = TRUE, col = "purple")
+```
+
+## Uso de Factor
+
+Las variables cualitativas pueden quedar muy bien definidas como datos categóricos si se transforman a factor:
+```{r}
+Fsexcor <- factor(DDRS1$Sexcor)
+Fsexcor
+```
+## Plot
+
+Plot hace un diagrama formado por rectangulos si es que la variable es factor(cualitativos). Plot si acepta variable numerica y lo que origina es un diagrama del tipo "dispersion"
+```{r}
+
+plot(DDRS1$Edad) #aquila variable es cuantitiva y produce una nube de puntos
+```
+
+```{r}
+plot(Fsexcor)
+
+```
+
+
+```{r}
+tabsexo <- table(DDRS1$Sexcor)
+
+barp<- plot(Fsexcor, main = "Gráfico de barras de Sexo", col = c("white","yellow","red"),xlab = "Sexo", ylab = "Frecuencia absoluta", ylim = c(-100,1400))
+
+text(barp, tabsexo=0.5, labels = tabsexo)
+grid(nx  =NA, ny = NA,lwd = 1, lty = 1, col = "grey")
+```
+
+```{r}
+hist(DDRS1$Peso)
+```
+```{r}
+boxplot(DDRS1$Peso, horizontal = TRUE)
+```
+
+```{r}
+EstaturasReales <- filter(DDRS1, Estatura >= 100 & Estatura <= 210) 
+EstaturasReales
+
+```
+```{r}
+hist(EstaturasReales$Estatura)
+```
+### Cambiando intervalos
+
+```{r}
+hi <-hist(EstaturasReales$Estatura, xlab = "Estaturas de alumnos", ylab = "Frecuencia absoluta", col="lightblue",border="purple", main = "Histograma de Estaturas bien escritas de alumnos UTEC", breaks=40)
+
+text(hi$mids,hi$counts,labels=hi$counts,adj=c(0.5,-0.5),cex=.5)
+
+```
+```{r}
+DDRS2 <- mutate(DDRS1, Estcor = ifelse(Estatura<2, 100*Estatura, ifelse(Estatura>250, 0.1*Estatura, Estatura)))
+DDRS2
+```
+```{r}
+summary(DDRS2$Estcor)
+```
+```{r}
+hist(DDRS2$Estcor)
+```
+```{r}
+hi <-hist(DDRS2$Estcor, xlab = "Estaturas de alumnos", ylab = "Frecuencia absoluta", col="lightblue",border="purple", main = "Histograma de Estaturas bien escritas de alumnos UTEC", breaks=20)
+
+text(hi$mids,hi$counts,labels=hi$counts,adj=c(0.5,-0.5),cex=.5)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
