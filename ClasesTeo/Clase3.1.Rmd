@@ -850,10 +850,31 @@ text(hi$mids,hi$counts,labels=hi$counts,adj=c(0.5,-0.5),cex=.5)
 ```
 
 
+## Relaciones entre variables
 
+Podemos ir usando estas para enceontrar nuevos graficos que relacionan 2 variables
 
+Tabla Cruzada entre sexo y ciclo
 
+```{r}
+tabsexoyciclo<- table(DDRS2$Sexcor, DDRS2$Ciclo)
 
+tabsexoyciclo
+```
+
+## Grafico de barras apiladas
+
+```{r}
+
+barplot(tabsexoyciclo, main= "Barras apiladas de sexo y ciclo", col = c("red","green","yellow"))
+legend(x="topright", legend = c("Desconocido", "Femenino", "Masculino"), fill = c("red","green","yellow", title = "leyenda"))
+```
+
+Ahora un diagrama de cajas para la edad clasificada por sexo:
+
+```{r}
+boxplot(formula=DDRS2$Edad~DDRS2$Sexcor, data = DDRS2, col=c("lightgreen","lightblue"), horizontal=TRUE)
+```
 
 
 

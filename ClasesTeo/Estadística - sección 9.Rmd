@@ -1,0 +1,1612 @@
+---
+title: "ESTADISTICA SECCIÓN 9"
+output: html_notebook
+---
+
+# Subtítulos:
+Es necesario colocar un símbolo #, adelante del texto.
+
+Otro subtitulo.
+==============
+ Colocar una secuencia de simbolos  "igual" para generar subtítulos.
+
+
+Mas subtítulos que puedo usar.
+-----------------------------
+
+
+# Escribiendo textos.  
+Debemos conocer las reglas básicas.De lo contrario, no se realizará lo que queremos.  
+Habrán notado que para cambiar de línea se debe dejar dos espacios en blanco y luego escribir en la siguiente línea.
+
+# Viñetas para los mejores cantantes:
+
+- Adele
+- Cold play
+- Oasis
+
+Ejemplo de aplicación de viñetas:  
+
+# Integrantes del grupo:
+
+- Farfan, Jefferson (38, Alianza Lima)
+- Guerrero, Paolo (40, Alianza Lima)
+- Lapadula, Gianlucca (33, Alianza Lima)
+
+
+# Numeración:
+
+1. Deben revisar los materiales.
+2. Deben revisar los vídeos.
+3. Deben estudiar.
+
+
+# Otras formas de generar viñetas:
+* Frase 1
+  + Frase 2
+    - frase 3
+* Mas frases 1
+* Mas frases 2
+
+
+Ejemplo: 
+
+
+* Equipo de fútbol:
+  + Delanteros
+    - Lapadula
+    - Lapadula
+    - Lapadula
+    - Cuydiaz
+  + Volantes
+    - Tapia
+    - Yotún
+    - Cueva
+  + Defensas
+    - Advíncula
+    - zambrano
+    - Trauco
+    - Callens
+  + Arquero
+    - Gallese
+    - Campos
+    
+* Equipo de Voley
+  + Atacantes
+  + Armadores
+  + Desarmadores 
+ 
+
+# Otra forma de numerar:
+1) Se
+2) Puede 
+3) Usar
+4) Paréntesis
+
+# Texto en cursiva:
+
+*Puede poner el texto entre asteriscos, pero no se debe dejar espacios al inicio, ni al final junto a los asteriscos.*  
+_También funciona colocando el texto entre dos rayitas abajo._
+
+# Texto en negrita:
+**Colocar el texto entre dos asteriscos, sin dejar espacio en blanco al inicio y final junto a los asteriscos.**  
+__También es válido colocarlo entre dos rayitas abajo a cada lado, sin dejar espacio en blanco.__  
+*_Hola_*
+
+# negrita y cursiva:
+
+***Prueba*** 
+
+__*También así*__
+
+*__o así__*
+
+# Texto en colores:
+<span style="color:blue"> El texto siguiente será en *azul  y además en cursiva*. </span>  
+
+<span style="color:red"> El texto siguiente será en *rojo en cursiva*. </span>  
+
+<span style="color:blue"> El texto siguiente será en **azul en azulita**. </span>  
+
+<span style="color:pink"> El texto siguiente será en **azul en rosadita**. </span>  
+
+<span style="color:skyblue"> El texto siguiente será en  ***celeste***. </span>  
+
+
+
+# Tachado de palabras:
+~~para algo inválido~~
+
+# Superíndices:
+
+ Por ejemplo si quiero colocar exponentes: x^2^
+ 
+ En cursiva:  *x^2^*
+ 
+# Matemáticas:
+
+Digitare un texto matematico, a continuación:  $y=mx+b$
+
+Si deseo que esté centrado: 
+$$y=mx+b$$
+
+escribo una ecuación de segundo grado:
+
+$ax^{2}+bx+c=0$
+entonces:  
+$$x1=\frac{-b+\sqrt(b^{2}-4ac)}{2a}$$
+y 
+$$x2=\frac{-b-\sqrt(b^{2}-4ac)}{2a}$$
+
+Notas:
+\frac{numerador}{denominador}  lo lee como una fracción
+\sqrt()  lo lee como raíz cuadrada
+
+Una fracción en general es:
+$$\frac{numerador}{denominador}$$
+
+# Colocar enlaces:
+
+  <http://www.starbucks.com>
+  
+  <http://www.depor.com>
+  
+
+  
+  
+  
+  
+  
+# Pegando imágenes
+
+ ![Mi primera imagen](Imagen 1.jpg){height=200, width=200}   
+ 
+ Imagen centrada:
+
+ <center>![Mi imagen de prueba](Imagen 2.jpg){height=height, width=width}<center> 
+ 
+ 
+ 
+# Resultados con comentarios 
+ 
+```{r}
+A<-14
+B<-80
+# la suma de A y B es
+(A+B)
+```
+cat: concatenar un texto con un resultado.
+ 
+```{r}
+cat("la suma de A y B es",A+B)
+```
+ 
+ =================================================================================================================
+ 
+ Lunes 10/04
+ 
+  # Paquetes y librerias:
+
+## Para ver que paquetes dispone R.
+`Library()`
+
+
+
+```{r}
+library()
+```
+
+También se puede ver que paquetes están instalados y cargados, en la ventana derecha inferior:  **Packages**.  
+
+## Para instalar algún paquete nuevo: 
+`install.packages("nombre_paquete")`  
+por ejemplo algunos paquetes que se debe tener instalado son:  
+
+`install.packages("readr")`  
+`install.packages("plyr")`  
+`install.packages("dplyr")`  
+`install.packages("ggplot2")`   
+opcionales
+`install.packages("tidyr")`  
+`install.packages("tidyverse")`  
+
+```{r}
+install.packages("readr")
+```
+Ya estaba precargado en mi R (en mi caso)
+
+
+Lo anterior es para instalar paquetes.
+Pero para poder usar las funciones que contiene:
+
+`library(readr)`
+`library(plyr)`
+`library(dplyr)`
+`library(ggplot2)`
+
+`installed.packages()` para ver que paquetes **están instalados**.
+```{r}
+install.packages()
+```
+
+
+Ahora las librerias:
+```{r}
+library(readr)
+```
+
+
+Recordar que para la lectura de un archivo excel, se debe descargarlo y guardarlo en la carpeta donde está el PROYECTO R, con extensión  `.csv`  (valores separados por comas).
+
+
+Análogo:
+
+```{r}
+read.csv("Datos_Diversos.csv")
+```
+
+Tener en cuenta que se debe escribir en el comando anterior *read.csv( )*,  el nombre del archivo guardado en la carpeta proyecto, exactamente igual como esté escrito en su nombre. Sino , no lo abrirá.  
+
+# Base de datos prefijadas en R:
+En R se tienen algunas bases de datos pequeñas, prefijadas.
+
+```{r}
+data()
+```
+
+algunas bases adecuadas:
+```{r}
+women   
+```
+
+altura en pulgadas (2.54 cm)
+peso en libras (0.454 kg)
+
+```{r}
+iris
+```
+
+otro:
+```{r}
+trees
+```
+
+
+otro
+```{r}
+cars
+```
+
+# Descriptores numéricos:
+
+## media
+
+La media o promedio: Es el valor mas simple de calcular. Es el mas habitual para  el cálculo de la nota representativa de un alumno y saber así si aprueba o desaprueba.
+Para calcularlo se usa la fórmula siguiente:
+
+Dado n datos $x_1,x_2, ...,x_n$: su media será:
+
+$$\overline{X}=\frac{x_{1}+x_{2}+ ... +x_{n}}{n}$$
+
+## mediana: 
+La mediana se denota con $M_e$. Es el dato que está en el centro de todo el conjunto ordenado de datos.  
+Ejemplo:  
+$A=\{2,4,4,7,8,10,10\}$ Su mediana será:$M_e=7$
+$A=\{2,2,4,4,7,8,10,10\}$ Su mediana será:$M_e=\frac{4+7}{2}=5.5$
+
+## moda:
+Es el dato que mas se repite.($M_o$)
+$A=\{2,4,4,4,7,8,8,8,8,8,10,10\}$ Su moda será:$M_o=8$ y su frecuencia modal es 5.
+
+Con R, se pueden calcular mediante:
+
+```{r}
+A<-c(2,4,4,4,7,8,8,8,8,8,10,10)
+A
+```
+
+Media
+```{r}
+mean(A)
+```
+El promedio de todos los datos contenidos en A es 6.75
+
+Mediana
+```{r}
+median(A)
+```
+La mediana es:
+ El mayor del 50% del grupo de los menores.
+ El menor del 50% del grupo de los mayores.
+
+
+Moda
+```{r}
+table(A)
+```
+1,3,1,5,2 representa la cantidad de veces que se repite cada dato que está encima.
+Moda= 8 (se repite 5 veces).  
+frecuencia modal = 5  
+
+NOTA:   
+Si hay una sola moda ==> unimodal  
+si hay 2 modas ==> bimodal
+Si hay 3 modas ==> trimodal
+etc  
+Puede suceder que no exista moda.  
+========================================================================================
+Lo mas adecuado para calcular descriptores de posición es:
+
+```{r}
+summary(A)
+```
+Interpretación:
+min= 2 ==> El dato mínimo de A es 2.  
+máx=10 ==> El dato máximo de A es 10.  
+mean=6.75 ==> El promedio de todos los datos de A es 6.75.  
+median=8 ==> la mediana de los datos de A es 8.
+Quartil 1 = 4 ==> el cuartil 1 de los datos de A es 4.  
+Interpretación de Q1:  
+- El mayor del 25% de los menores datos es Q1=4.  
+- El menor del 75% de los mayores datos es Q1=4.  
+Quartil 3 = 8 ==> el cuartil 3 de los datos de A es 8.  
+
+Base de datos prefijada:  CARS
+
+```{r}
+cars
+```
+
+Calculemos algunos descriptores de posición de cars
+
+
+```{r}
+summary(cars$speed)
+```
+mean=15.4 ==> la velocidad promedio es 42.98 unidades.  
+mediana=15 ==> la mayor velocidad del 50% de las menores velocidades es 15 unidades.
+       o tambien: la menor velocidad  del 50% de las mayores velocidades es 15 unidades.  
+Q1= 12 ==>la mayor velocidad del 25% inferior es 12 unidades.  
+       o también: la menor velocidad del 75% superior es 12 unidades.  
+       
+
+  
+  
+  
+       
+```{r}
+table(cars$speed)
+```
+    La velocidad mas frecuente   es 20 unidades  y su frecuencia modal es 5.  
+    
+ librerias mas usadas:
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+```
+
+
+# DESCRIPTORES NUMÉRICOS PARA BASE DE DATOS:
+
+Para hacer la letura de la base de datos, en R:
+```{r}
+read.csv("Datos_Diversos.csv")
+
+```
+
+Pero es mejor hacer la lectura de datos  con  `read_csv`
+
+```{r}
+DD <- read_csv("Datos_Diversos.csv")
+DD
+
+```
+
+```{r}
+glimpse(DD)
+```
+
+Se aprecia que hay variables que no corresponden con su tipo verdadero.
+
+Ahora corregiremos los tipos de variable.   
+
+Se puede convertir la columna de un data frame de cualitativo a numérico. Así: df$a <- as.numeric(df$a)  
+Se puede convertir la columna de un data frame de numérico a cualitativo. Así: df$a <- as.character(df$a)  
+Veamos:
+
+```{r}
+DD$Ciclo<-as.character(DD$Ciclo)
+DD$Edad<-as.numeric(DD$Edad)
+DD$`Peso (kg)`<-as.numeric(DD$`Peso (kg)`)
+DD$`Tiempo de reacción`<- as.numeric(DD$`Tiempo de reacción`)
+DD$`Talla de zapato`<-as.numeric(DD$`Talla de zapato`)
+
+```
+Veamos como está ahora el tipo de variable:
+```{r}
+glimpse(DD)
+```
+
+==============================================================================
+
+Iniciamos con las librerías clásicas
+
+
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+```
+
+
+
+## Dimensión de la base de datos
+ es decir obtener su # de filas y # de columnas
+
+```{r}
+dim(DD)
+```
+Significado:
+Hay 2225 filas ( observaciones )  
+hay 20 columnas (variables)  
+
+Se debería tener: 2225 x 20 =44500 (celdas). Pero no todas las celdas están llenas y por ello la cantidad real de datos llenos des menos.  ¡que cantidad nde datos llenos habrá? En un momento lo veremos.  
+
+
+También puedes saber su numero de filas y columnas:
+nrow(DD)    Calcula solo el número de filas u observaciones.
+ncol(DD)    Calcula el número de columnas ( variables)
+```{r}
+nrow(DD)
+```
+
+
+Hay 2225 filas.  
+
+Ahora el # de columnas
+```{r}
+ncol(DD)
+```
+Hay 20 columnas.
+
+
+
+#otra forma de leer el tipo, pero por variables
+`class(variable)`
+
+```{r}
+class(DD$Apellido)
+class(DD$`Estatura (cm)`)
+class(DD$`Signo del zodiaco`)
+
+```
+
+Otra forma para ver el tipo:  
+También `str` devuelve un resumen del tipo de variable que asumirá RStudio 
+
+```{r}
+str(DD) # Resumen del tipo de variable de la base de datos
+summary(DD) #Resumen general de la base de datos
+```
+# Descriptores de EDAD:
+
+descriptores de edad:
+
+```{r}
+summary(DD$Edad)
+```
+
+Mín-----$25%$--------Q1-----$25%$------Q2------$25%$------Q3------$25%$-----Máx  
+
+============menores=>  <===========================mayores==================  
+
+
+Interpretaciones:
+La edad mínima de los estudiantes es 16
+La edad máxima de los estudiantes es 53
+La edad promedio es 19.36 años de los estudiantes
+Q1: 18 ==> la máxima edad del 25% de las menores edades es 18, o también puede ser      
+           la mínima edad del 75% de las mayores edades es 18.    
+Q2 = Me: 19 ==> la máxima edad del 50% de las menores edades es 19, o también puede ser    
+                la mínima edad del 50% de las mayores edades es 19.    
+Q3: 20 ==> la máxima edad del 75% de las menores edades es 20, o también puede ser    
+           la mínima edad del 25% de las mayores edades es 20.    
+NA : 353 ==> hay 353 celdas de la columna edad, que no han sido respondidas.  
+           
+========================================================================================= 
+ 
+ 
+## Cuantiles:
+Los cuantiles permiten calcular datos que forman un p% desde la izquierda (desde los menores).  
+La función cuantil se obtiene mediante:  `quantile(x, probs, na.rm = FALSE)  `  
+x: es la variable (alguna columna de tu base de datos).  
+probs: Probabilidades (son # que van de 0 a 1:  0.1=10%, 0.25=25%, 0.08=8%, etc.) ==> esto se mide desde la izquierda.
+na.rm (removiendo los NAs) Por defecto es FALSE. Es recomendable poner TRUE.  
+
+Ejemplo en cars
+```{r}
+quantile(cars$speed, 0.9)  # estoy hallando la mayor velocidad del 90% de las menores velocidades.
+quantile(cars$speed, 0.9, na.rm=F)
+quantile(cars$speed, 0.9, na.rm=T)
+# Aquí en Cars , da lo mismo poner T o F, pues Cars no tiene datos NA y nada se va a remover
+
+```
+
+1) La mayor velocidad del 90% de las menores velocidades es 23.1.     ===> Verdadero  
+2) La mayor velocidad del 90% de los vehículos mas rápidos es 23.1.   ===> FALSO  
+3) La mayor velocidad del 90% de los vehículos mas lentos es 23.1.    ===> vERDADERO (pues tienen menor velocidad: mas lentos)  
+4) La menor velocidad del 10% de los vehículos mas rápidos es 23.1.   ===> verdadero  
+5) La menor velocidad del 10% de los vehículos mas lentos es 23.1.    ===>  FALSO  
+
+
+mín.-------------------$90%$------------------**Q**-----$10%$------máx    
+.................mas lentos...........----------|---mas rápidos......  
+
+
+OTRO EJEMPLO:  
+Ahora ya se puede hallar algunos quantiles de EDAD
+```{r}
+quantile(DD$Edad,0.5,T)  # 50% medido desde la izquierda: mediana = Cuartil 2.  Con TRUE se ignora los NAs.
+quantile(DD$Edad,0.25,T) # 25% medido desde la izquierda: Cuartil 1.  Con TRUE se ignora los NAs.
+quantile(DD$Edad,0.8,T)  # 80% medido desde la izquierda ( los mas guaguitas)
+quantile(DD$Edad,0.2,T)
+
+```
+Algunas interpretaciones:
+Q(0.5) = mediana = Q2=19
+Q(0.25)=cuartil 1= Q1= 18
+Q(0.8)=20 ==> "Percentil 80": es la máxima edad del 80% de los alumnos mas jovenes o tambien: es la mínima edad del 20% de los estudiantes "mas viejitos".
+Q(0.2)=18
+
+======================================================================================================================
+
+y como se hallaría la moda de la Edad?
+
+```{r}
+table(DD$Edad)
+```
+
+La moda (Mo)  de la edad es  18 años con frecuencia 594 (frecuencia modal).
+Es decir: la edad mas frecuente es 18 años entre los estudiantes y se repite 594 veces.
+
+# Tablas cruzadas
+
+```{r}
+table(DD$Período, DD$Ciclo)
+```
+1) En el periodo 2023-0 ¿cuál es el ciclo que estaba de moda?
+El ciclo 5. Pues se repite mas veces: 11 veces.
+2) En el periodo 2023-1 ¿Cuál es el ciclo modal?
+El ciclo 3. Pues se repite 121 veces.
+
+
+
+
+######################################################################################################
+
+
+### Datos completos /Datos incompletos
+DATA FRAME: base de datos    
+VARIABLE: cada columna (vertical)   
+OBSERVACIONES:cada fila (horizontal)   
+DATOS: cada casilla o celda, de la base de datos    
+DATO FALTANTE: es una celda que no ha sido respondida.     
+
+## Conteo de NAs
+
+`is.na()` -> este comando detecta la ubicación de los datos incompletos.
+```{r}
+is.na(DD)
+```
+is.na origina la base de datos pero con 2 posibles respuestas: TRUE o FALSE.  
+TRUE: ahí hay NA.  
+FALSE: ahí no hay NA.  
+
+Nota:
+`is.na()` -> devuelve el data frame (la base de datos ) lleno con False o True. En una celda con dato faltante devuelve TRUE.   
+`sum(is.na())` -> suma y cuenta la cantidad de datos faltantes (NA).   (celdas con NAs)
+`!is.na()` -> es la negación de is.na, es decir ==> TRUE: no hay NA, FALSE: hay NA.    
+`sum(!is.na())` ==> suma y cuenta el total de datos completos. (celdas completas)
+```{r}
+sum(is.na(DD))      # Cantidad de datos faltantes (NA) 
+sum(!is.na(DD))     # Cantidad de datos completos (no son NA)
+```
+
+
+Existen 14948 datos faltantes (NA) ==> 14908 NAs   
+Existen 29552 datos completos (celdas completas)  
+
+Entonces:
+ El # total de celdas en el data frame es: 14948 + 29552= 44500 celdas ( llenas + vacías)
+ 
+ 
+ 
+ Pero recordemos que hay 2225 filas y 20 columnas: 2225x20 = 44500 celdas
+ 
+ Conclusión:  
+  **cantidad de NAs + Cantidad de datos completos = # de filas x # de columnas.**
+  
+  
+  Hasta aquí hoy lunes  17/04
+   
+ 
+ ================================================================================================
+ 
+
+También se puede usar is.na() para cada columna
+```{r}
+sum(is.na(DD$Edad))  # Hallare el # de celdas vacías en EDAD
+sum(is.na(DD$`Signo del zodiaco`))  # hallo el # de celdas vacías en ZODIACO 
+sum(is.na(DD$`Fecha de nacimiento`))
+```
+hay  353 NA en la columna edad
+hay  368 NA en  ZODIACO
+hay  1541 NA en NACIMIENTO
+
+```{r}
+sum(!is.na(DD$Edad)) # hallo la cantidad de celdas no vacías en la columna EDAD
+```
+
+
+### Casos completos / incompletos
+**CASOS = OBSERVACIONES = FILAS= Los encuestados **
+CASOS: Hace referencia a toda una observación (a toda una fila)
+Un caso completo hace referencia a una observación con todas las celdas completas; es decir el individuo  ha respondido a todas las variables.
+CASO COMPLETO = TODAS LAS CELDAS LLENAS DE ESA FILA.
+```{r}
+sum(complete.cases(DD)) #complete.cases -> casos completos
+sum(!complete.cases(DD))#!complete.cases -> casos incompletos
+```
+
+Hay 0 filas completas  
+hay 2225 filas incompletas (por culpa de las columnas 19 y 20, que estaban ocultas para los encuestados) 
+
+**RECORDAR:**
+### Diferencia entre los comandos is.na() y complete.cases()  
+  + is.na identifica las **casillas vacías** en todo el dataframe.Para saber la cantidad total de datos faltantes, se puede usar el comando sum(is.na()). 
+  + complete.cases() verifica la cantidad de **casos completos**, es decir verifica que en cada observación (filas) no haya casillas vacías, también se puede utilizar sum(complete.cases()).  
+  + En ambos comandos es posible obtener su opuesto, para ello se antepone la exclamación antes del comando; por ejemplo: sum(!complete.cases) o (sum(!is.na())), son: la suma de **casos incompletos** y la suma de **casillas completas** o **datos completos** respectivamente.
+  
+**readr** es para la lectura de datos
+  Antes de colocar dplyr se debe colocar plyr
+**dplyr** es para la limpieza de datos, pero antes de cargar dplyr, debe cargarse PLYR.
+
+======================================================================================
+
+Para leer los nombres de las variables:
+```{r}
+names(DD)
+```
+Para renombrar las columnas, usar `rename`
+ejemplo:
+
+```{r}
+DDR <- rename(DD, Estatura= `Estatura (cm)`, Peso= `Peso (kg)`, Signo = `Signo del zodiaco`, Reacción = `Tiempo de reacción`, Videojuegos = `Juega videojuegos`, Deporte = `Hace deporte`, Color = `Color favorito`, Calzado = `Talla de zapato`, Polo = `Talla de polo`)
+
+```
+
+Veamos como quedó DDR:
+```{r}
+names(DDR)
+```
+
+# La función select
+Cuando se tiene un data frame con muchas variables, muchas veces queremos analizar solo a alguna de ellas. Esto se puede hacer usando la función **select**, que nos permite tomar un subconjunto de variables y obtener un nuevo data frame.
+
+```{r}
+select(DDR,Edad,Ciclo,Período, Estatura)
+```
+
+
+Para seleccionar varias columnas consecutivas:
+Otra forma es colocando un rango de valores con el nombre de una variable inicial, seguido de 2 puntos y luego el nombre de una variable final.  
+```{r}
+select(DDR,Sección:Estatura)
+```
+Ahora lo aplico para eliminar las 2 últimas columnas (19 y 20):
+```{r}
+DDRS<-select(DDR,Período:Indicaciones)
+DDRS
+```
+
+Cual es su cantidad de filas llenas??
+```{r}
+sum(complete.cases(DDRS))
+```
+Hay 587 estudiantes que llenaron todas las variables.  
+
+El comando `select` tiene otras aplicaciones en relacion a la seleccion de variables. Pueda buscar patrones, es decir que los nombres de las variables tengan algo en comun. En estos casos se pueden utilizar los argumentos `starts_with("")`, `ends_with("")`, `contains("")`
+
+```{r}
+select(DDR, starts_with("S")) 
+```
+
+otro caso:
+```{r}
+select(DDR, ends_with("no"))
+```
+
+otro caso:
+```{r}
+select(DDR, contains("tu"))
+```
+
+==================================================================================================================
+Recordar:
+
+La media ($\overline{X}$) es para variables ...cuantitativas   (usando: mean)
+La mediana es para variables...cuantitativas y cualitativas ordinales    (summary) pero para cualitativas ?????
+La moda es para variables...cuantitativas y cualitativas  (usando:  table)
+
+categóricas:
+```{r}
+Letras<-c("a","b","c","d","e","f","g","h","i","j")
+```
+
+
+
+Se puede hallar su mediana y sus cuantiles 
+```{r}
+quantile(Letras,0.25,type=3)
+quantile(Letras,0.5,type=3)
+quantile(Letras,0.75,type=3)
+
+```
+
+También puede hallar simultáneamente varios cuantiles:
+```{r}
+quantile(Letras,probs=c(0.25,0.5,0.75,0.9), type=3)
+```
+conclusión: tanto para numéricos o categóricos, si se desea un percentil se usa `quantile(vector, decimal, type=3)
+
+
+
+
+#####################################################################################################
+
+Hasta aquí se ha visto descriptores de posición: 
+
+Ahora se verán los descriptores de dispersión:
+
+# Descriptores de dispersión:
+IDEA:  
+La dispersión equivale a la variabilidad de los datos o a la separación de los datos.
+Mayor separación: Mas dispersión  
+Datos mas aproximados : menor dispersión.  
+
+Sea los conjuntos:
+
+```{r}
+NestadA<-c(6, 8, 8, 8,  10, 10, 10, 19, 20, 20)
+NestadB<- c(9, 10, 10, 12, 13, 13, 13, 14, 14, 14 )
+```
+
+las notas en Estadística de A están con mayor dispersión que las notas en B.  
+Cuando hay menor dispersión se puede emitir mejor juicio o conclusión.  
+
+
+```{r}
+summary(DDR$Edad)
+```
+
+
+¿Qué conjunto tiene mayor dispersión?  
+
+1) RANGO TOTAL:  $R=máx-mín$  
+2) RANGO INTERCUARTIL:  $Q_{3}-Q_{1}$
+3) VARIANZA:     $V(X)=\frac{\sum_{i=1}^{n}(x_{i}-\overline{X})^{2}}{n-1}$
+4) DESVIACIÓN ESTÁNDAR:    $S=\sqrt{V(X)}$
+5) COEFICIENTE DE VARIACIÓN:   $CV=\frac{S}{\overline{X}}*100%$
+
+
+Si  CV(A)> CV(B)  ===> se puede afirmar:
+- B tiene menor dispersión relativa
+- Mas homogéneo o mas uniforme es B
+- Mas heterogéneo es A.
+
+
+==========================================================================================================
+==========================================================================================================
+
+Con R studio:
+
+La varianza:
+
+La desviación:
+
+El coeficiente de variación: 
+```{r}
+sd(Ncalc)
+sd(Nestad)
+```
+
+====================================================================================
+Lunes 24/04:
+
+Iniciamos con las librerías clásicas
+
+
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+```
+
+# `Filter`
+
+Algo muy utilizado es **Filter**, pues permite crear subconjuntosde filas ,  de la muestra, sujetos a alguna condición para las variables.
+
+* Algunos operadores numéricos que se pueden usar aqui son:
+  - `>`, `<`         mayor que ,    menor que 
+  - `>=`, `<=`       mayor o igual,   menor o igual
+  - `!=`, `==`       diferente,       igual
+* Operadores booleanos:
+  - `&` and    "y"
+  - `|` or     "o"
+  - `!` no     "no"
+
+EJEMPLOS:
+1) Selecciona a todos los estudiantes que están en sección 3.
+```{r}
+A<- filter(DDR, Sección=="3")
+A
+
+```
+
+Aplicación:
+calcular la edad promedio de todos los alumnos de la sección 3.
+
+y ahora si ya puedo hallar su media:
+```{r}
+mean(A$Edad)
+```
+La edad promedio de los alumnos de la sección 3 es 18.79 años.  
+
+
+
+
+2) Seleccionar las observaciones  con edad menos de 30 y con estatura por lo menos 1.70 m
+```{r}
+filter(DDR,Edad <30, Estatura >=170)
+
+```
+
+
+### Comando `unique`: (para saber todos los nombres o respuestas diferentes  que hay en una columna)
+```{r}
+unique(DDR$Signo)
+```
+
+
+```{r}
+unique(DDR$Carrera)
+```
+Sexo:
+```{r}
+unique(DDR$Sexo)
+```
+
+
+
+
+3) Hallar los alumnos con edad menos de 18 y con signo del toro.
+```{r}
+filter(DDR, Edad<18, Signo=="tauro"|Signo=="Tauro")
+
+```
+
+
+##############################################################
+4) Seleccionar personas de 18 o  21 años que sean tauro.  
+
+En este caso se solicitan personas de 18 o de 21 años, para ello podemos utilizar la barra vertical "|" cuantas veces sea necesario, para evitar algo que puede volverse muy tedioso se puede utilizar 
+```{r}
+filter(DDR, Edad==18|Edad==21, Signo=="tauro"|Signo=="Tauro") #Forma 1
+
+```
+
+
+pero también puede usarse el argumento `%in%`  (pertenece) el cual funciona como una reducción de varios operadores lógicos "or". 
+```{r}
+filter(DDR, Edad %in% c(18, 21), Signo %in% c("tauro", "Tauro")) #Forma 2
+```
+
+5) Si se desea Seleccionar personas que midan al menos 175 centímetros y su talla de polo sea al menos L
+
+
+Debemos ver que respuestas hay en la columna Polo:
+```{r}
+unique(DDR$Polo)
+```
+Las tallas que son al menos L:  L, XL, XXL, l, xl,  Xl.  
+
+ahora si se puede filtrar:
+```{r}
+
+filter(DDR, Estatura >= 175, Polo %in% c("L","XL","XXL","l", "xl", "Xl"))
+
+```
+6) Seleccionando alumnos que tengan edad 19 o  20 o 52 años y que hayan respondido su peso
+
+
+```{r}
+filter(DDR, Edad==19|Edad==20|Edad==52, Peso !="NA" )
+```
+7) seleccionando a los que no tienen NA, en Peso:
+```{r}
+filter(DDR, !is.na(DDR$Peso))
+```
+
+8)seleccionando a los que tienen NA en la variable EDAD 
+
+```{r}
+filter(DDR, is.na(DDR$Edad) )
+```
+
+
+
+9) Eliminando todas las observaciones que no hayan respondido su calzado
+```{r}
+filter(DDR,Calzado != "NA")
+```
+
+HASTA AQUÍ POR HOY LUNES 24/04
+
+============================================================================================================
+
+
+
+
+10) Seleccionar a personas de la sección 4 del periodo académico de marzo a Julio en el 2022.
+
+Usamos `unique`
+```{r}
+unique(DDR$Período)
+```
+
+Se tiene dos valores distintos de 2022 1:  "2022.1"  ,   "2022-1"
+Ahora ya lo podemos filtrar
+```{r}
+BD<- filter(DDR, Sección=="4", Período %in% c("2022-1", "2022.1"))
+BD
+```
+
+ejemplo de continuación:  Ahora, calcular el coeficiente de variación de la edad de los alumnos de sección 4 y del periodo 2022 1.
+
+
+Ahora ya se puede calcular el promedio edad 
+```{r}
+m<- mean(BD$Edad)
+m
+```
+Es la edad promedio de alumnos de sección 4 y que estudiaron en periodo 2022 1.  
+
+y su desviación:
+```{r}
+s<- sd(BD$Edad)
+s
+```
+Es la desviación estándar de la edad de sección 4 y del período 2022 1.  
+
+El coeficiente de variación es:
+```{r}
+CV<- (s/m)*100
+CV
+```
+El coeficiente de variación de la edad de la sección 4 y del periodo 2022 1 es  5.722%
+
+
+
+11) Seleccionar a las personas que no han puesto su estatura ( tienen NA) y son mayores de 20 años
+
+```{r}
+filter(DDR, is.na(Estatura), Edad>20)
+```
+
+
+
+#########################################################################################
+#########################################################################################
+# Corrigiendo los datos de la columna SEXO:
+
+Es importante que la variable (columna) esté con las respuestas correctas y que se entienda.
+ Veamos el caso de la variable Sexo:
+
+```{r}
+unique(DDR$Sexo)
+
+```
+
+
+Corregiremos las respuestas que **evidentemente están mal escritas**, en esta columna.
+
+ojito, ojito: muchas veces , en la escritura de las respuestas, hay "espacios en blanco" y debemos librarnos de ellos:  
+
+1) Eliminar espacios en blanco de respuestas (datos) mal escritas:
+Se usa el paquete stringr, el cual sirve para manipular caracteres y expresiones regulares; viene incluido en tidyverse.
+primero cargar la libreria:
+```{r}
+library(stringr)
+```
+
+ahora se usará `str_trim`
+Como vamos a corregir la variable Sexo, vamos a asignar un nuevo nombre  a la base de datos
+```{r}
+DDRS<-DDR
+DDRS
+```
+
+usemos table para ver como está la variable Sexo:
+```{r}
+table(DDRS$Sexo)
+```
+
+ahora si eliminemos los espacios en blanco innecesarios que podría haber en las respuestas de Sexo
+
+```{r}
+ 
+DDRS$Sexo <- str_trim(DDRS$Sexo,side = "both") 
+
+table(DDRS$Sexo)
+```
+quedó igual, pues en las respuestas de Sexo, no había espacios en blanco.
+
+2) Pasar de mayúsculas a minúsculas o viceversa:
+
+
+```{r}
+DDRSminus<-tolower(DDRS$Sexo)   # convierte todas las respuestas con minúsculas, de SEXO
+table(DDRSminus)
+```
+o si desean, todo a mayúsculas:
+```{r}
+DDRSmayus<-toupper(DDRS$Sexo)   # todo SEXO a mayúscula
+table(DDRSmayus)
+```
+
+**DESDE AQUI**:   Pero si se desea ir modificando la columna de la misma base de datos, usar para pasar a minusculas:
+```{r}
+DDRS$Sexo <- str_to_lower(DDRS$Sexo,locale = "es")   # a minúscula
+table(DDRS$Sexo) 
+
+```
+o para pasar a mayusculas:
+```{r}
+DDRS$Sexo <- str_to_upper(DDRS$Sexo,locale = "es") 
+table(DDRS$Sexo) 
+```
+
+observando:
+```{r}
+unique(DDRS$Sexo)
+```
+
+
+
+
+
+
+3) Modificamos la escritura de respuestas que son evidentes mal escritas:
+
+Con `mutate` se crea nuevas columnas y se guarda al final de la base de datos
+
+```{r}
+
+DDRSC<- mutate(DDRS,Sexcor=case_when(Sexo == '' ~'desconocido',
+Sexo == 'MM' ~ 'M',Sexo=='NB'~'desconocido',Sexo=='M'~'M',Sexo=='F'~'F', Sexo=='L'~'desconocido'))
+
+DDRSC
+
+```
+
+Creamos una tabla
+```{r}
+table(DDRSC$Sexcor)                            # no cuenta los NA
+table(DDRSC$Sexcor, useNA = "always")          # si cuenta los NA
+
+```
+
+# GRÁFICOS
+
+ Y ahora si ya se puede hacer el **gráfico circular**
+
+```{r}
+frec<-c(2, 555, 1313, 355)   # Son las frecuencias de la columna SEXO CORREGIDO
+frec
+```
+## diagrama circular básico
+```{r}
+
+pie(frec)  # anti horario: clockwise=F
+```
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+con sus frecuencias:
+```{r}
+pie(frec, labels=frec)
+```
+
+
+con una leyenda:
+```{r}
+pie(frec, labels=frec)
+legend("topleft", legend = c("Desconocido", "Femenino", "Masculino", "no especifica"),
+       fill =  c("white", "lightblue", "mistyrose","lightgreen"))
+```
+
+con colores:
+```{r}
+pie(frec, labels=frec, col= c("white", "blue", "yellow", "green"))
+legend("topleft", legend = c("Desconocido", "Femenino", "Masculino", "no especifica"),
+       fill =  c("white", "blue", "yellow","green"))
+```
+
+
+nuevo paquete:
+
+```{r}
+install.packages("plotrix")
+
+```
+
+Cargando su libreria:
+```{r}
+library(plotrix)
+
+```
+
+
+
+y ahora en 3D
+```{r}
+pie3D(frec, labels=frec, col= c("white", "blue", "yellow", "green"))
+legend("topleft", legend = c("Desconocido", "Femenino", "Masculino", "no especifica"),
+       fill =  c("white", "blue", "yellow","green"))
+
+
+```
+
+finalmente el título:
+```{r}
+pie3D(frec, labels=frec, col= c("white", "blue", "yellow", "green"))
+legend("topleft", legend = c("Desconocido", "Femenino", "Masculino", "no especifica"),
+       fill =  c("white", "lightblue", "mistyrose","lightgreen"))
+title("Gráfico circular de la variable Sexo")
+
+```
+Diagrama circular es ideal para variables cualitativas, pero tambien se puede usar en cuantitativas discretas, pero que tengan pocos valores distintos.
+
+
+Hasta aquí por hoy martes 25/04
+
+====================================================================================
+========================================================================================
+
+ 
+ 
+**DIAGRAMA DE CAJAS**
+
+Se hace para cuantitativas.
+Un diagrama de cajas, contiene la información resumida en base a 5 números importantes:
+Mín,  Cuartil 1,  Mediana,   Cuartil 3,  Máx.  
+
+
+Min---------Q1-----------Me------Q3-------Max.  
+
+
+Diagrama de cajas para la variable EDAD:
+
+```{r}
+
+
+summary(DDRSC$Edad)
+
+```
+
+hacemos su diagrama de cajas:  
+```{r}
+boxplot(DDRSC$Edad)
+```
+
+con color
+```{r}
+boxplot(DDRSC$Edad, col="blue", horizontal = TRUE)
+
+```
+Aquí existe varios puntos (bolitas en blanco) que significan que están muy distanciados o aislados  del resto de puntos.  
+
+con los puntos:
+```{r}
+boxplot(DDRSC$Edad, col="yellow", horizontal = TRUE , xlab ="Edad en años")
+stripchart(DDRSC$Edad, method = "jitter", pch = 19, add = TRUE, col = "purple")
+
+```
+con stripchart se logra graficar mediante puntos, a los datos numéricos que se tenía.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+librerías
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+library(plotrix)
+```
+
+Tipos de variable:
+ Cualitativas  
+ Cuantitativas
+
+Uso de **Factor**:
+Las variables cualitativas pueden quedar muy bien definidas como datos categóricos si se transforman a factor:
+```{r}
+Fsexcor<-factor(DDRSC$Sexcor)
+Fsexcor
+```
+
+ahora recién se puede usar para hacer algunos gráficos:
+
+## PLOT:
+Hace un diagrama formado por rectángulos, si es que la variable es factor (cualitativos).
+Plot si acepta variable numérica y lo que origina es un diagrama del tipo "dispersión".
+
+```{r}
+plot(DDRSC$Edad)  # aqui la variable es cuantitativa y produce una nube de puntos.
+```
+
+Plot básico de  la variable Sexo corregido (cualitativo) visto como factor:
+```{r}
+plot(x=Fsexcor)   # aqui mi variable es cualitativa, pero como Factor
+```
+
+Recordar que se tiene:
+```{r}
+table(DDRSC$Sexcor)
+```
+
+Plot editado:
+```{r}
+plot(x = Fsexcor, main = "Gráfico de barras para la variable Sexo",
+     xlab = "Sexo", ylab = "Frecuencia absoluta", 
+     col = c("white", "yellow", "royalblue"))
+```
+
+
+
+otra forma es con:
+
+## Barplot
+Es obligatorio, si es que se tiene una base de datos, formar una tabla.
+```{r}
+tabsexo<-table(DDRSC$Sexcor) # la información de resumen de sexcor, se coloca en la tabla tabsexo.
+barp<- barplot( tabsexo,main="Gráfico de barras de Sexo",col=c("white", "yellow", "red"),xlab = "Sexo", ylab = "Frecuencia absoluta")
+
+```
+
+
+
+ahora con algunos detalles mas
+```{r}
+tabsexo<-table(DDRSC$Sexcor) # la información de resumen de sexcor, se coloca en una tabla y se asigna un nombre.
+barp<- barplot( tabsexo,main="Gráfico de barras de Sexo",col=c("white", "yellow", "red"),xlab = "Sexo", ylab = "Frecuencia absoluta" )
+text(barp, tabsexo + 0.5, labels = tabsexo)
+# grid(nx = NA, ny = NULL, lwd = 1, lty = 1, col = "gray")
+```
+mejoramos los valores sobre cada rectángulo:
+```{r}
+tabsexo<-table(DDRSC$Sexcor) # la información de resumen de sexcor, se coloca en una tabla y se asigna un nombre.
+barp<- barplot( tabsexo,main="Gráfico de barras de Sexo",col=c("white", "yellow", "red"),xlab = "Sexo", ylab = "Frecuencia absoluta",ylim=c(-50,1400) )
+text(barp, tabsexo + 0.5, labels = tabsexo)
+grid(nx = NA, ny = NULL, lwd = 1, lty = 1, col = "blue")
+```
+
+
+
+
+################################################################################
+
+
+
+## Histogramas
+Obligatorio, esta gráfica es para variables cuantitativas
+
+Solo para variables numéricas y generalmente es para variables continuas. También se usa cuando la variable es discreta, pero que tome una gran cantidad de valores diferentes.    
+
+Con Estatura, que **está medida en centímetros**.
+```{r}
+summary(DDRSC$Estatura)
+```
+
+
+
+Observaciones:
+1) de hecho la estatura mínima está mal dada.( lo a escrito en metros)
+2) La estatura máxima también esta mal (debería ser 165.3 cm)
+3) Notar que la media es muy baja, debido al mínimo dato que es demasiado pequeño.  
+OJITO OJITO: La media siempre es muy susceptible a los extremos.Peroooooo, la mediana no queda influenciada por los valores extremos.  
+ la mediana es preferible usar cuando hay valores muy extremos.  
+
+veamos como graficar el histograma
+```{r}
+hist(DDRSC$Estatura)
+```
+
+
+Ahora histograma de Edad:
+
+```{r}
+hist(DDRSC$Edad)
+```
+Histograma de peso:
+```{r}
+hist(DDRSC$Peso)
+```
+
+
+
+MEJORANDO EL HISTOGRAMA DE ESTATURAS:  
+
+Analizando con diagrama de cajas:
+```{r}
+boxplot(DDRSC$Estatura, col= "green", horizontal=TRUE)
+```
+
+Diagrama de cajas de Edad
+```{r}
+boxplot(DDRSC$Edad, col= "skyblue", horizontal=TRUE)
+```
+
+Diagrama de cajas de Peso:
+```{r}
+boxplot(DDRSC$Peso, col= "yellow", horizontal=TRUE)
+```
+
+En general si se tienen datos extremos , fuera de lo común, debemos tratar de arreglarlos y debemos eliminar los datos muy extremos que sospechamos que provienen de errores insalvables y que no detectamos su tipo de error.
+
+Asumiendo que sabemos que nadie tiene mas de 2.10 metros en UTEC, entonces debo eliminar a la estatura minima y a la máxima, ya que estan mal escritos. Sin embargo posteriormente, arreglaremos las estaturas mal escritas. Por el momento nos limitamos a graficar solo a los que dejaron sus datos bien escritos.
+
+Eliminando los datos muy extremales. (esta decisión a veces es muy drástica)
+```{r}
+Estaturasreales<-filter(DDRSC,Estatura>=100 & Estatura<=210) # considero que la minima estatura es 1m y la máxima es 2.10m
+Estaturasreales
+```
+
+Ahora ya se puede hacer su histograma;
+```{r}
+hist(Estaturasreales$Estatura)
+```
+
+Mejoramos a este diagrama:
+```{r}
+hist(Estaturasreales$Estatura, xlab = "Estaturas de alumnos", ylab = "frecuencia absoluta", col ="lightblue" , main="Histograma de las Estaturas bien escritas, de alumnos UTEC",  )
+```
+
+
+** cambiando el numero de intervalos **
+```{r}
+hi<-hist(Estaturasreales$Estatura, xlab = "Estaturas de alumnos", ylab = "frecuencia absoluta", col ="lightblue" , border= "red" , main="Histograma de Estaturas bien escritas de alumnos UTEC", breaks=6 )
+
+```
+Observando las alturas
+
+```{r}
+hi<-hist(Estaturasreales$Estatura, xlab = "Estaturas de alumnos", ylab = "frecuencia absoluta", col =c("blue", "white","blue","white","blue","white"), border= "black" , main="Histograma de Estaturas bien escritas de alumnos UTEC", breaks=6  )
+text(hi$mids,hi$counts,labels=hi$counts, adj=c(0.5, -0.5), cex=.5)
+```
+
+
+
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+SEGUNDA FORMA: 
+## Corrigiendo la variable Estatura
+```{r}
+summary(DDRSC$Estatura)
+```
+
+Previamente con el comando `summary` se detectó errores del tipo: personas que medían menos de 2 centímetros, lo cual evidenciaba que la intención era poner 1.xx metros y no 1.xx centímetros, también hay personas que han puesto una estatura en mas de 1600 cms. 
+Tomaremos estaturas usuales que varían entre  130 centímetros y menores de  200 centímetros.  
+veremos a las personas que han puesto estaturas inusuales:
+
+```{r}
+ filter(DDRSC, Estatura<130|Estatura>200) # Verificando si hay personas menores a 130 o mayores a 200
+```
+
+se observa que hay varias personas cuyas estaturas están expresadas en metros, lo cual debe corregirse para que la estatura quede expresada en centímetros.
+
+
+```{r}
+DDRSEC<- mutate(DDRSC,Estcor = ifelse(Estatura < 2, 100*Estatura, Estatura)) 
+DDRSEC
+
+```
+
+Analizando nuevamente:
+```{r}
+summary(DDRSEC$Estcor)
+```
+
+con diagrama de cajas:
+```{r}
+boxplot(DDRSEC$Estcor, horizontal=T)
+```
+
+ No queda tan bien si es que hago el histograma considerando a los datos extremos que pasan de 200 cm.
+```{r}
+hist(DDRSEC$Estcor)
+```
+
+Si alguien escribió 1653 cm ha querido escribir: 165.3 cm ==> se le divide entre 10
+Por ello hacemos
+
+```{r}
+DDRSEC<- mutate(DDRSEC,Estcor = ifelse(Estatura < 2, 100*Estatura, ifelse(Estatura>250, 0.1*Estatura, Estatura))) 
+DDRSEC
+
+```
+
+Veamos sus medidas de resumen:
+```{r}
+summary(DDRSEC$Estcor)
+```
+
+
+
+Veamos un boxplot:
+```{r}
+boxplot(DDRSEC$Estcor, horizontal = T)
+```
+
+Ahora ya se puede hacer el histograma correcto de Estaturas:
+
+
+```{r}
+hist(DDRSEC$Estcor)
+```
+
+
+Podemos tomar la decisión de no considerar en el histograma a las estaturas extremas poco usuales,  ya que se aprecian que son atípicas.
+
+```{r}
+Estaturasreales<-filter(DDRSEC,Estcor>=130 & Estcor<=200)
+Estaturasreales
+```
+
+Ahora ya se puede hacer su histograma;
+```{r}
+hist(Estaturasreales$Estcor)
+```
+
+Lo mejoramos
+```{r}
+hist(Estaturasreales$Estcor, xlab = "Estaturas de alumnos", ylab = "frecuencia absoluta", col ="green" , main="Histograma de las Estaturas corregidas, de alumnos UTEC",  )
+```
+** cambiando el numero de intervalos **
+```{r}
+hi<-hist(Estaturasreales$Estcor, xlab = "Estaturas de alumnos", ylab = "frecuencia absoluta", col ="green" , border= "blue" , main="Histograma de Estaturas corregidas de alumnos UTEC", breaks=6 )
+
+```
+Colocando las alturas (frecuencias)
+
+```{r}
+hi<-hist(Estaturasreales$Estcor, xlab = "Estaturas de alumnos", ylab = "frecuencia absoluta", col =c("green"), border= "blue" , main="Histograma de Estaturas corregidas de alumnos UTEC", breaks=6  )
+text(hi$mids,hi$counts,labels=hi$counts, adj=c(0.5, -0.5), cex=.5)
+```
+
+Recordar:
+fi ==> frecuencias absolutas ( enteros positivos)
+hi= fi / n  ==> frecuencia relativa ( # decimal entre 0 y 1)
+
+HASTA AQUI POR HOY MARTES  02/05
+
+####################################################
+# RELACIONANDO VARIAS VARIABLES
+Hasta el momento se tiene Sexcor y Estcor, dos variables ya corregidas.
+También podemos considerar a Ciclo y Edad como dos variables con valores normales.
+Se puede apreciar al usar Table:
+```{r}
+
+library(plyr)
+library(dplyr)
+
+
+D1RSE <- mutate(DDRS1, Estcor = ifelse(Estatura<2, 100*Estatura, ifelse(Estatura>250, 0.1*Estatura, Estatura)))
+table(D1RSE$Ciclo)
+
+D1RSE$Sexcor[D1RSE$Sexcor %in% c("no especifica")] <- NA
+
+table(D1RSE$Sexcor)
+```
+
+```{r}
+table(D1RSE$Edad)
+```
+Podemos ir usando estas para encontrar nuevos gráficos que relacionan 2 variables
+
+Tabla cruzada entre Sexo y Ciclo
+
+```{r}
+tabsexoyciclo<-table(D1RSE$Sexcor, D1RSE$Ciclo)
+tabsexoyciclo
+#barplot(tabsexoyciclo,main="barras apiladas",col=c("green","yellow"))
+#legend(x="topright",legend=c("F","M"),fill = c("green","yellow"),title="leyenda")
+
+```
+# Gráfico de barras apiladas:
+
+```{r}
+tabsexoyciclo<-table(D1RSE$Sexcor ,D1RSE$Ciclo)
+tabsexoyciclo
+barplot(tabsexoyciclo,main="barras apiladas de Sexo y Ciclo",col=c("red","green", "yellow"))
+legend(x="topright",legend=c("Desconocido","Femenino","Masculino"),fill = c("red","green","yellow"),title="leyenda")
+```
+
+Ahora un diagrama de cajas para la Edad clasificada por Sexo:
+```{r}
+boxplot(formula=D1RSE$Edad~D1RSE$Sexcor, data=D1RSE,col="green", horizontal= T, na.rm=F)
+```
+Diagrama de cajas de Estatura Vs Sexo
+
+```{r}
+boxplot(formula=D1RSE$Estcor~D1RSE$Sexcor, data=D1RSE,col="yellow", horizontal= T)
+```
+
+
+Izquierda (MENOR)-----------------------------------------------------------(MAYOR)Derecha
+
+
+
+
+Si desean hallar los valores de los diagramas de cajas,"desconocido", "F" y "M", hacer lo siguiente:
+```{r}
+# Valores de Edades de "desconocido"
+summary(D1RSE$Estcor[D1RSE$Sexcor=="desconocido"])
+# Valores de Edades de "Mujeres"
+summary(D1RSE$Estcor[D1RSE$Sexcor=="F" ])
+# Valores de Edades de "Hombres"
+summary(D1RSE$Estcor[D1RSE$Sexcor=="M"]) 
+```
+
+
+Hasta aquí la clase de hoy  viernes 28/04
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+## MOSAICO
+
+Es una tabla graficada, con todas las posibilidades entre dos variables cualitativas.
+genera regiones rectangulares, cuyo tamaño es proporcional a la frecuencia en cada una de las regiones.
+como ejemplo usamos una tabla de la clase anterior que relaciona a sexo y ciclo de la base BDC1C
+
+
+```{r}
+tabsexoyciclo<-table(D1RSE$Sexcor ,D1RSE$Ciclo)
+tabsexoyciclo
+mosaicplot(tabsexoyciclo,main="Sexo vs Ciclo" ,col=c("green","purple","lightblue", "yellow"))
+
+```
+
+
+
