@@ -242,7 +242,7 @@ Recordar que para la lectura de un archivo excel, se debe descargarlo y guardarl
 Análogo:
 
 ```{r}
-read.csv("Datos_Diversos.csv")
+read.csv("Datos_Diversos1.csv")
 ```
 
 Tener en cuenta que se debe escribir en el comando anterior *read.csv( )*,  el nombre del archivo guardado en la carpeta proyecto, exactamente igual como esté escrito en su nombre. Sino , no lo abrirá.  
@@ -393,14 +393,14 @@ library(tidyverse)
 
 Para hacer la letura de la base de datos, en R:
 ```{r}
-read.csv("Datos_Diversos.csv")
+read.csv("Datos_Diversos1.csv")
 
 ```
 
 Pero es mejor hacer la lectura de datos  con  `read_csv`
 
 ```{r}
-DD <- read_csv("Datos_Diversos.csv")
+DD <- read_csv("Datos_Diversos1.csv")
 DD
 
 ```
@@ -1520,33 +1520,46 @@ hi= fi / n  ==> frecuencia relativa ( # decimal entre 0 y 1)
 HASTA AQUI POR HOY MARTES  02/05
 
 ####################################################
+
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+```
+
 # RELACIONANDO VARIAS VARIABLES
 Hasta el momento se tiene Sexcor y Estcor, dos variables ya corregidas.
 También podemos considerar a Ciclo y Edad como dos variables con valores normales.
 Se puede apreciar al usar Table:
 ```{r}
-
-library(plyr)
-library(dplyr)
-
-
-D1RSE <- mutate(DDRS1, Estcor = ifelse(Estatura<2, 100*Estatura, ifelse(Estatura>250, 0.1*Estatura, Estatura)))
-table(D1RSE$Ciclo)
-
-D1RSE$Sexcor[D1RSE$Sexcor %in% c("no especifica")] <- NA
-
-table(D1RSE$Sexcor)
+table(DDRSEC$Ciclo)
 ```
+tambien puede ser:
+```{r}
+unique(DDRSEC$Ciclo)
+```
+Se observa que la columna CICLO; tiene todas sus respuestas correctas.  
+
 
 ```{r}
-table(D1RSE$Edad)
+table(DDRSEC$Edad)
 ```
+Por ser cuantitativa tambien se puede usar Summary:
+```{r}
+summary(DDRSEC$Edad)
+```
+No se necesita corregir la EDAD:  
+
+
 Podemos ir usando estas para encontrar nuevos gráficos que relacionan 2 variables
 
 Tabla cruzada entre Sexo y Ciclo
 
 ```{r}
-tabsexoyciclo<-table(D1RSE$Sexcor, D1RSE$Ciclo)
+tabsexoyciclo<-table(DDRSEC$Sexcor, DDRSEC$Ciclo)
 tabsexoyciclo
 #barplot(tabsexoyciclo,main="barras apiladas",col=c("green","yellow"))
 #legend(x="topright",legend=c("F","M"),fill = c("green","yellow"),title="leyenda")
@@ -1555,7 +1568,7 @@ tabsexoyciclo
 # Gráfico de barras apiladas:
 
 ```{r}
-tabsexoyciclo<-table(D1RSE$Sexcor ,D1RSE$Ciclo)
+tabsexoyciclo<-table(DDRSEC$Sexcor ,DDRSEC$Ciclo)
 tabsexoyciclo
 barplot(tabsexoyciclo,main="barras apiladas de Sexo y Ciclo",col=c("red","green", "yellow"))
 legend(x="topright",legend=c("Desconocido","Femenino","Masculino"),fill = c("red","green","yellow"),title="leyenda")
@@ -1563,37 +1576,29 @@ legend(x="topright",legend=c("Desconocido","Femenino","Masculino"),fill = c("red
 
 Ahora un diagrama de cajas para la Edad clasificada por Sexo:
 ```{r}
-boxplot(formula=D1RSE$Edad~D1RSE$Sexcor, data=D1RSE,col="green", horizontal= T, na.rm=F)
+boxplot(formula=DDRSEC$Edad~DDRSEC$Sexcor, data=DDRSEC,col="green", horizontal= T)
 ```
 Diagrama de cajas de Estatura Vs Sexo
 
 ```{r}
-boxplot(formula=D1RSE$Estcor~D1RSE$Sexcor, data=D1RSE,col="yellow", horizontal= T)
+boxplot(formula=DDRSEC$Estcor~DDRSEC$Sexcor, data=DDRSEC,col="yellow", horizontal= T)
 ```
 
 
 Izquierda (MENOR)-----------------------------------------------------------(MAYOR)Derecha
 
 
-
+# IMPORTANTISIMO:
 
 Si desean hallar los valores de los diagramas de cajas,"desconocido", "F" y "M", hacer lo siguiente:
 ```{r}
 # Valores de Edades de "desconocido"
-summary(D1RSE$Estcor[D1RSE$Sexcor=="desconocido"])
+summary(DDRSEC$Estcor[DDRSEC$Sexcor=="desconocido"])
 # Valores de Edades de "Mujeres"
-summary(D1RSE$Estcor[D1RSE$Sexcor=="F" ])
+summary(DDRSEC$Estcor[DDRSEC$Sexcor=="F" ])
 # Valores de Edades de "Hombres"
-summary(D1RSE$Estcor[D1RSE$Sexcor=="M"]) 
+summary(DDRSEC$Estcor[DDRSEC$Sexcor=="M"]) 
 ```
-
-
-Hasta aquí la clase de hoy  viernes 28/04
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 ## MOSAICO
 
 Es una tabla graficada, con todas las posibilidades entre dos variables cualitativas.
@@ -1602,13 +1607,17 @@ como ejemplo usamos una tabla de la clase anterior que relaciona a sexo y ciclo 
 
 
 ```{r}
-tabsexoyciclo<-table(D1RSE$Sexcor ,D1RSE$Ciclo)
+tabsexoyciclo<-table(DDRSEC$Sexcor ,DDRSEC$Ciclo)
 tabsexoyciclo
 mosaicplot(tabsexoyciclo,main="Sexo vs Ciclo" ,col=c("green","purple","lightblue", "yellow"))
+#"purple","lightblue", "yellow"
 
 ```
-/#########################################################################
 
+
+
+##################################################################################################
+FIJAZO:
 **Diagrama de dispersión:**
 Es un diagrama de puntos, que relaciona a dos variables y cuyo objetivo es ver alguna tendencia de los datos en parejas
 Ejemplo:
@@ -1698,7 +1707,7 @@ x_notasP<-c(15,17,18,12,16,15,14,11,16,18)  # notas en ex parcial
 ```
 
 La variable dependiente es Notas en Final, que depende de las Notas en parcial.
-La dependiente se grafica en el eje Vertical. La indenpendiente en el eje Horizontal.
+La dependiente se grafica en el eje Vertical.
 *gráfico de dispersión*
 ```{r}
 pairs(x_notasP ~ y_notasF, col= "red")
@@ -1721,7 +1730,7 @@ datosregr<- data.frame("X"=x_notasP,"Y"=y_notasF)
 datosregr
 ```
 
-hallemos la ecuación de regresión usando:  `lm(var_depend ~ var_ind, data)`, esto significa modelo lineal. En este caso es obligatorio ir primero Y y luego la X.
+hallemos la ecuación de regresión usando:  `lm(var_depend ~ var_ind, data)`
 
 ```{r}
 resultados<-lm(datosregr$Y~datosregr$X,data=datosregr)
@@ -1737,7 +1746,7 @@ Intercepto: b= Beta0= -0.2258,                          m= Pendiente= Beta1=0.95
 
 ==> Reemplazo valores:                    Y=-0.2258 + 0.9556*X  ... "ecuación de regresión lineal simple"
 
-Ejemplo de PREDICCION:
+Ejemplo de aplicación de esa ecuación:
 si la nota en parcial fuera 10 entonces, la nota en el final sería:  Y=-0.2258 + 0.9556*(10)= 9.3302
 
 Es decir, si un estudiante en el parcial obtiene nota 10, entonces en el final tendría  9.3302.
@@ -1769,10 +1778,6 @@ plot(datosregr$X,datosregr$Y,xlab="X",ylab="Y", col="red")
 Pero le agregamos la recta de regresión
 ```{r}
 plot(datosregr$X,datosregr$Y,xlab="X",ylab="Y")
-abline(resultados, col="blue")
-```
-```{r}
-plot(datosregr$X,datosregr$e,xlab="X",ylab="e")
 abline(resultados, col="blue")
 ```
 
@@ -1812,6 +1817,18 @@ Aquí  su interpretación sera:
  El 66.5% de las variaciones en las notas del examen final, son explicadas por el modelo de regresión.
  En general: "El r^2  %  de las variaciones de Y, son explicados  por el modelo de regresión"
 
+##################################################################################
+##################################################################################
+
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+```
+
 
 # ALGUNOS DETALLES FINALES SOBRE R:
 
@@ -1825,7 +1842,7 @@ Ejemplo:
 Eliminar las filas  que tienen algún NA, en la columna PESO.
 
 ```{r}
-Pesofiltrado<-drop_na(DDRSEC,Peso) # lo único que hace, es eliminar filas que tengan NA, en alguna columna.
+Pesofiltrado<-drop_na(D1RSE,Peso) # lo único que hace, es eliminar filas que tengan NA, en alguna columna.
 Pesofiltrado
 ```
 
@@ -1837,7 +1854,7 @@ mean(Pesofiltrado$Peso)
 
 En drop_NA se puede colocar solo la base de datos, sin mencionar ninguna columna:
 ```{r}
-D1RSEFiltrado<- drop_na(DDRSEC)
+D1RSEFiltrado<- drop_na(D1RSE)
 D1RSEFiltrado
 ```
 
@@ -1845,26 +1862,22 @@ D1RSEFiltrado
 Usando ** %>% ** (pipe) 
 Este operador tiene como objetivo cambiar el orden de escritura al realizar un comando o instrucción, para obtener una lectura secuencial.
 Ejemplo:
-  Al usar  `drop_na(D1RSE,Peso)` decimos: "eliminar los NA del data frame D1RSE, para la columna
-
-  ELIMINAR LOS NA DE LA BASE DE DATOS "..." PARA LA COLUMNA PESO 
-Peso".
+  Al usar  `drop_na(D1RSE,Peso)` decimos: "eliminar los NA del data frame D1RSE, para la columna Peso".
   usando PIPE sería:  
   `D1RSE %>% drop_na(Peso) ` ==> se lee: Del data frame D1RSE eliminar los NA de la columna peso".
   
-  DE LA BASE "..." DEBO ELIMINAR LOS NA DE LA COLUMNA PESO
   
 
 ```{r}
 
-filtradoPeso<-DDRSEC %>% drop_na(Peso)
+filtradoPeso<-D1RSE %>% drop_na(Peso)
 filtradoPeso
 ```
 
 otro ejemplo de  %>%:
 Primero sin  PIPE:
 ```{r}
-Edadfiltro1<-filter(DDRSEC, Edad > 25) # filtrar de BDC1C, segú Edad y escogiendo a los de mas de 25 años.
+Edadfiltro1<-filter(D1RSE, Edad > 25) # filtrar de BDC1C, segú Edad y escogiendo a los de mas de 25 años.
 Edadfiltro1
 ```
 puede ser escrito así:
@@ -1873,6 +1886,166 @@ Edadfiltro2<- D1RSE %>% filter(Edad > 25) # de la base D1RSE, se filtra según l
 Edadfiltro2
                               
 ```
+
+
+
+
+#####################################################################################################
+Hasta el momento se ha corregido: Sexcor y Estcor. Además se tienen 2 variables que estan buenas, Edad, Ciclo.
+Vamos a corregir ahora el Periodo:
+
+Observando en EDAD:
+```{r}
+summary(D1RSE$Edad)
+```
+
+Observando Ciclo
+```{r}
+table(D1RSE$Ciclo)
+```
+Todo bién con estas 2 columnas.
+se observa que todo está normal.  
+
+## Corregir la variable Periodo
+```{r}
+table(D1RSE$Período)
+```
+
+tambien puede ser: 
+
+```{r}
+unique(D1RSE$Período) #Permite conocer todas las formas que han respondido para la variable periodo
+
+```
+
+
+luego:
+
+```{r}
+
+D1RSEP<- D1RSE %>% mutate( Períodocor = 
+        ifelse(Período == "1/1/2019", "2019-1",
+        ifelse(Período == "2020.1", "2020-1",
+        ifelse(Período %in% c("2020.2", "2020 2"), "2020-2",
+        ifelse(Período %in% c("2021.1", "2/1/2021"), "2021-1",
+        ifelse(Período %in% c("2021.2", "2021-  2", "2021 - 2"), "2021-2",
+        ifelse(Período %in% c("2022.1"), "2022-1",
+        ifelse(Período %in% c("2022 - 2", "2022.2"), "2022-2"  ,
+        ifelse(Período %in% c("2023.1", "2023 -1", "2023 - 1", "2023-I","2023-2","1/1/2023"), "2023-1"               , Período)))
+        )))))) 
+# DDL %>% count(Periodo) #Con este comando se visualiza que la variable se ha corregido; también se puede utilizar unique(Periodo_Corregido)
+D1RSEP
+```
+
+###################################################################
+
+Hasta aquí por hoy.
+##################################################################
+
+```{r}
+library(readr)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+```
+
+La base original:
+ 
+```{r}
+D1R
+```
+
+
+
+Revisando el principio y final de la data. 
+
+A veces es necesario ver el principio y final de la base de datos, para tener una idea de qué podría estar fallando o si todo anda con normalidad  
+```{r}
+head(D1RSEP) #lee las primeras filas de la base de datos
+tail(D1RSEP) #lee las últimas filas de la base de datos
+```
+
+## Criterios de limpieza de datos
+
+* ¿Qué hacer si encontramos una casilla **vacía** *(NA)* o caso incompleto?  
+  + Eliminar a la observación que no sea un **caso completo** (no es conveniente), pues La desventaja es que se puede perder información de otras variables que sin son importantes, además de incrementar ligeramente el sesgo ya existente.
+  + Re-consultar la fuente y completar la información con el valor verídico.
+  + **No se debe** completar la información a criterio o al azar, pues se estaría manipulando intencionalmente la información, lo cual no es éticamente correcto.  
+* ¿Qué hacer si encontramos una casilla **con un valor evidentemente erróneo**?  
+  + Eliminar la observación (fila)  ==> (*ya se explicó sus desventajas*).  no es conveniente.
+  + Corregir el valor, por el adecuado; para esto podemos consultar con la fuente original (**es lo ideal**), o corregirlo a criterio siempre y cuando el error sea **muy evidente**, es decir, que sea notorio la intención de la persona que dio la respuesta. ejemplo de esto es: estatura --> 1.68 cm, el error nos lleva a pensar que la intención fue poner 1.68 m y no 1.68 cm.  
+
+## Corregiremos otra variable:  DEPORTE
+
+```{r}
+table(D1RSEP$Deporte, useNA = "always")
+```
+Eliminando espacios en blanco
+```{r}
+ 
+D1RSEP$Deporte <- str_trim(D1RSEP$Deporte,side = "both") 
+
+table(D1RSEP$Deporte)
+```
+para pasar a mayúsculas:
+```{r}
+D1RSEP$Deporte <- str_to_lower(D1RSEP$Deporte,locale = "es") 
+table(D1RSEP$Deporte) 
+```
+
+ahora se usa mutate:
+```{r}
+
+D1RSEPD<-mutate(D1RSEP,Depcor=case_when(Deporte == '´si' ~'si',
+Deporte == 'algo' ~ 'algo',Deporte=='no'~'no',Deporte=='nu'~'no',Deporte=='si'~'si', Deporte=='sí'~'si', Deporte=='sï '~'si'))
+
+D1RSEPD
+
+```
+
+###############################################################################
+
+ya se tiene corregido: 
+Sexcor, Estcor, Períodocor, Depcor, Edad, Ciclo, 
+
+## Exportando la base de datos limpia
+
+De la base D1RSEPD seleccionemos las variables:
+```{r}
+Datosalumnos<-select(D1RSEPD,Edad, Ciclo, Estcor,Sexcor, Períodocor,Depcor)
+Datosalumnos
+```
+
+Este data frame está limpio. Hay NA, en algunas variables, pero no se les eliminó para no perder información.
+Para exportarlo  se usa el comando  `write_csv` de la librería `readr`
+```{r}
+write_csv(Datosalumnos, "DataAlumnos.csv" )
+
+```
+haber:
+```{r}
+DA<-read_csv("DataAlumnos.csv")
+DA
+```
+
+#################################################################################  FIN.
+
+
+Para exportar la base de datos limpia solo utilizamos el comando `write_csv` de la librería `readr`.
+
+```{r}
+write_csv(DA, "DatosdeAlumnos")
+```
+
+
+###########################################################################################
+
+
+FINNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+POR FINNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+
 
 
 
