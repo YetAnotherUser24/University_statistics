@@ -1,0 +1,157 @@
+---
+title: "TeoSem10"
+format: html
+editor: visual
+---
+
+# Choose and Combn
+
+## Seleccionar 2 bolitas sin reemplazo de una caja que contiene 1 dorada, 1 crema, 1 blanca y 1 azul
+
+Nota, seleccionar, elegir, escoger, **-\>** **COMBINAR**
+
+choose devuelve el numero de posibilidades y combn devuelve las posibilidades. (No importa el orden)
+
+```{r}
+choose(4,2) # Sacar 2 bolitas de 4 diferentes
+```
+
+```{r}
+combn(c("A","B","C","D"),2)
+```
+
+## Sacar 2 bolitas con reemplazo de una caja que contiene 1 dorada, 1 crema, 1 blanca y 1 azul
+
+Nota, sacar con reemplazo es extraer una bolita y luego devolverla. (Sí importa el orden)
+
+Usar expand.grid (Producto cartesiano)
+
+"y" significa producto.
+
+```{r}
+expand.grid(c("A","B","C","D"),c("A","B","C","D"))
+```
+
+# Simulación
+
+## Jugar 3 veces contra R-studio: piedra-papel-tijera
+
+(Yo) Jugador: piedra, papel, tijera.
+
+Rstudio:
+
+```{r}
+#Inicio yo, indicando que sacare en cada juego:
+Yo<- c("piedra","papel","tijera")
+paste("Yo",Yo)
+
+#Ahora R-studio hace sus 3 jugadas
+Rs<-c(sample(c("piedra","papel","tijera"),3,T)) #T true -> reposición -> se puede repetir
+paste("Rs",Rs)
+```
+
+Mejorando el juego:
+
+Si empatan en cada juego, reciben un punto cada uno.
+
+Si uno gana recibe 2 puntos y el rival 0.
+
+```{r}
+#Inicio yo, indicando que sacare en cada juego:
+Yo<- c("piedra","papel","tijera")
+paste("Yo",Yo)
+
+#Ahora R-studio hace sus 3 jugadas
+Rs<-c(sample(c("piedra","papel","tijera"),3,T)) #T true -> reposición -> se puede repetir
+paste("Rs",Rs)
+
+Y <- 0
+
+# PRIMER TURNO
+if (Yo[1]=="piedra" & Rs[1]=="piedra"){
+  Y <- Y+1
+  }else{
+  if(Yo[1]=="piedra" & Rs[1]=="tijera"){
+    Y <- Y+2
+  }
+}
+
+
+
+if (Yo[1]=="papel" & Rs[1]=="papel"){
+  Y <- Y+1
+  }else{
+  if(Yo[1]=="papel" & Rs[1]=="piedra"){
+    Y <- Y+2
+  }
+}
+
+
+if (Yo[1]=="tijera" & Rs[1]=="tijera"){
+  Y <- Y+1
+  }else{
+  if(Yo[1]=="tijera" & Rs[1]=="piedra"){
+    Y <- Y+2
+  }
+}
+#SEGUNDO TURNO
+if (Yo[2]=="piedra" & Rs[2]=="piedra"){
+  Y <- Y+1
+  }else{
+  if(Yo[2]=="piedra" & Rs[2]=="tijera"){
+    Y <- Y+2
+  }
+}
+
+
+
+if (Yo[2]=="papel" & Rs[2]=="papel"){
+  Y <- Y+1
+  }else{
+  if(Yo[2]=="papel" & Rs[2]=="piedra"){
+    Y <- Y+2
+  }
+}
+
+
+
+if (Yo[2]=="tijera" & Rs[2]=="tijera"){
+  Y <- Y+1
+  }else{
+  if(Yo[2]=="tijera" & Rs[2]=="piedra"){
+    Y <- Y+2
+  }
+}
+
+
+#TERCER TURNO
+if (Yo[3]=="piedra" & Rs[3]=="piedra"){
+  Y <- Y+1
+  }else{
+  if(Yo[3]=="piedra" & Rs[3]=="tijera"){
+    Y <- Y+2
+  }
+}
+
+
+if (Yo[3]=="papel" & Rs[3]=="papel"){
+  Y <- Y+1
+  }else{
+  if(Yo[3]=="papel" & Rs[3]=="piedra"){
+    Y <- Y+2
+  }
+}
+
+
+
+if (Yo[3]=="tijera" & Rs[3]=="tijera"){
+  Y <- Y+1
+  }else{
+  if(Yo[3]=="tijera" & Rs[3]=="piedra"){
+    Y <- Y+2
+  }
+}
+
+paste("Yo:",Y,"puntons",";","Rs:",6-Y,"puntos")
+
+```
